@@ -1,0 +1,24 @@
+table, ul, div>p, strong>a {margin: 20px;}
+
+    td {padding: 5px; border: solid 1px black }
+            tr:nth-child(1) td:nth-child(1){color:brown}
+            tr:nth-child(1) td:nth-child(2){color:cadetblue}
+            tr:nth-child(2) td:nth-child(1){color:chartreuse}
+            tr:nth-child(2) td:nth-child(2){color:coral}
+            tr:last-child {color:crimson; text-align: center;}
+
+    em a{color: indigo;}
+    li>em a {color: orange;}
+    strong{color: chocolate;}
+
+    li p a{color: blue;}
+    div ul em a{color: green;}
+    li:first-child p a {color: red;}
+    li>a{color: yellow;}
+
+    p span em{color: violet;}
+
+    strong a{color: aqua;}
+    i a{color: gray;}
+        
+    
