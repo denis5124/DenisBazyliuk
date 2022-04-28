@@ -1,24 +1,23 @@
-table, ul, div>p, strong>a {margin: 20px;}
+.parametres {
+        padding-left: 77px;
+        height: 1023px;
+        width: 267px;
+        background-color: white;
+        line-height: 40px;
+        font-size: 16px;
+        float: left;
+        border: solid green 1px;
+}
 
-    td {padding: 5px; border: solid 1px black }
-            tr:nth-child(1) td:nth-child(1){color:brown}
-            tr:nth-child(1) td:nth-child(2){color:cadetblue}
-            tr:nth-child(2) td:nth-child(1){color:chartreuse}
-            tr:nth-child(2) td:nth-child(2){color:coral}
-            tr:last-child {color:crimson; text-align: center;}
-
-    em a{color: indigo;}
-    li>em a {color: orange;}
-    strong{color: chocolate;}
-
-    li p a{color: blue;}
-    div ul em a{color: green;}
-    li:first-child p a {color: red;}
-    li>a{color: yellow;}
-
-    p span em{color: violet;}
-
-    strong a{color: aqua;}
-    i a{color: gray;}
+.cards {background-color: white;
+        float: left;}
+.card {
+        margin: 16px;
+        padding: 8px 88px 152px 88px;
+        line-height: 10px;
+        font-size: 16px;
+        float: left;
+        border: solid red 1px;
+}
         
     
