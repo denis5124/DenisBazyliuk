@@ -4,31 +4,72 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Forms</title>
     <style>
-        
+        textarea{
+            width: 300px;
+            height: 40px;
+            resize: none;
+        }
+        input, label, textarea{
+            margin: 10px;
+        }
+        label, textarea{
+            display: block;
+        }
     </style>
 </head>
 
 <body>
 
     <form action="https://fe.it-academy.by/TestForm.php"        method="get">
-        Фамилия:<input type="text"><br>
-        Имя:<input type="text"><br>
-        Отчество:<input type="text"><br>
-        E-mail для связи:<input type="text"><br>
-        Согласен с правилами сайта:<input type="checkbox" checked><br>
-        <input type="submit" value="Регистрация">
+        Фамилия:<input type="text" name="lustname" ><br>
+        Имя:<input type="text" name="firstname"><br>
+        Отчество:<input type="text" name="secondName"><br>
+        E-mail для связи:<input type="text" name="mail"><br>
+        
+        
 
     <fieldset>
         <legend>Ваши данные</legend>
-        <label>Вид деятельности:<input type="radio" name="answer" value="1">студент 
-            <input type="radio" name="answer" value="2">рабочий
-            <input type="radio" name="answer" value="3">пенс
-        
+        <label>Вид деятельности:
+            <input type="radio" name="status" value="1">студент 
+            <input type="radio" name="status" value="2yes">рабочий
+            <input type="radio" name="status" value="3yes">пенсионер
+            <input type="radio" name="status" value="4yes">декретный отпуск
         </label>
-    </fieldset>
 
+        <label>Категория прав:
+            <input type="checkbox" name="license[]" value="1yes">A
+            <input type="checkbox" name="license[]" value="2yes">B
+            <input type="checkbox" name="license[]" value="3yes">C
+            <input type="checkbox" name="license[]" value="4yes">D
+        </label>
+
+        <label>Место проживания:
+            <select name="city">
+                <optgroup label="West">
+                    <option value="Minsk">Минск</option>
+                    <option value="Grodno">Гродно</option>
+                    <option value="Brest">Брест</option>
+                </optgroup>
+                <optgroup label="East">
+                    <option value="Vitebsk">Витебск</option>
+                    <option value="Gomel">Гомель</option>
+                    <option value="Mogilev">Могилев</option>
+                </optgroup>
+            </select>
+        </label>
+
+        
+            <textarea name="review" placeholder="отзыв"></textarea>
+            
+
+    </fieldset>
+    Согласен с правилами сайта:<input type="checkbox" checked><br>
+    <button type="reset">Сброс</button>
+    <input type="submit" value="Регистрация">
+    
     </form>
 </body>   
 </html>
