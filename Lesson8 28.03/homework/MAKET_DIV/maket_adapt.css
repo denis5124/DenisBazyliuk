@@ -1,0 +1,26 @@
+
+
+.maket {background: url('images/ball.png') right top repeat-y;
+}
+
+.kinds {width: 156px;
+        float: left;
+        background-image: url(images/полоска.png);
+        margin-right: 20px;
+}
+.photo {float: left;
+        margin-right: 16px;
+        margin-bottom: 16px;
+}
+.clearfix {content: "";
+        display: block;
+        clear: both;
+}
+.content {margin-left: 169px;
+}
+.football {margin-top: 0px;
+        padding-top: 10px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold
+}
