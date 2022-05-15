@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position</title>
+    <style>
+        *{margin: 0px;
+            padding: 0px;}
+        .text {position: relative;}
+
+        .pictures {position: absolute;
+            left: 10%;}
+
+        img {width: 200px;
+            height: 200px;}
+        img:nth-child(1) {position: absolute;}
+        img:nth-child(2) {position: absolute;
+            left: 200px;}
+        img:nth-child(3) {position: absolute;
+            top: 200px;
+            left: 100px;}
+        img:nth-child(4) {position: absolute;
+            top: 100px;
+            left: 100px;}
+        img:hover {z-index: 2;}
+    </style>
+</head>
+
+<body>
+    <p class="text">Я к вам пишу — чего же боле? Что я могу еще сказать? Теперь, я знаю, в вашей воле Меня презреньем наказать. Но вы, к
+        моей несчастной доле Хоть каплю жалости храня, Вы не оставите меня. Сначала я молчать хотела; Поверьте: моего стыда Вы
+        не узнали б никогда, Когда б надежду я имела Хоть редко, хоть в неделю раз В деревне нашей видеть вас.
+    </p>
+    <div class="pictures">
+        <img src="images/biohazard.png" alt="pict1">
+        <img src="images/Man-and-woman.png" alt="pict2">
+        <img src="images/Yin_and_Yang.png" alt="pict3">
+        <img src="images/No_smoking.png" alt="pict4">
+
+        <div style="clear:both"></div>
+    </div>
+    <p style="padding-top: 400px;">Чтоб только слышать ваши речи, Вам слово молвить, и потом Все думать, думать об одном И день и ночь до новой встречи.</p>
+</body>   
+</html>
