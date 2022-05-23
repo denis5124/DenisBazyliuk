@@ -1,0 +1,42 @@
+.maket
+    width: 1300px
+    margin: 0 auto
+
+    =lineLi
+        color: #FFFFFF
+        display: inline-block
+        font-family: 'Roboto'
+        font-style: normal
+        font-weight: 500
+        font-size: 12px
+        line-height: 32px
+        
+
+    .line
+        background-color: #333333
+        height: 32px
+        width: 100%
+        position: relative
+
+        ul
+            position: absolute
+            right: 80px
+
+            .liRight
+                margin-left: 32px
+                +lineLi
+        
+        ul:first-of-type
+            position: absolute
+            left: 80px
+
+            .liLeft
+                margin-right: 32px
+                +lineLi
+            
+                
+
+    .container
+        width: 1140px
+        background-color:  #E5E5E5
+        margin: 0 auto
