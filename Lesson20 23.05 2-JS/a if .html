@@ -19,7 +19,7 @@
         var patronymic = prompt('Введите вашe отчество:');
         var age
 
-        var ageStr = prompt('Сколько вам лет:');
+        var ageStr = parseInt (prompt('Сколько вам лет:'));
             if (!isNaN(ageStr)) {
                 var age = ageStr;
                 console.log(age+2);
@@ -46,7 +46,7 @@
         alert ('ваше ФИО: '+surname+' '+name+' '+ patronymic+'\n'
         +'ваш возраст в годах: '+ age+ '\n'
         +'ваш возраст в днях: '+ age*365+ '\n'
-        +'через 5 лет вам будет: '+ (age-(-5)) + '\n'
+        +'через 5 лет вам будет: '+ (age+5) + '\n'
         +'ваш пол: '+gender + '\n'
         +'вы на пенсии: '+ pension);
 
