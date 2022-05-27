@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>a ?:</title>
+
+    <style>
+    </style>
+
+</head>
+
+<body>
+
+    <script>
+
+        var surname = prompt('Введите вашe фамиию:');
+        var name = prompt('Введите вашe имя:');
+        var patronymic = prompt('Введите вашe отчество:');
+        var age
+
+        var ageStr = prompt('Сколько вам лет:');
+        var age = (!isNaN(ageStr))? ageStr: {var : prompt('Будьте внимательны. Сколько вам лет:')
+                (!isNaN(ageStr)) ? ageStr : (alert('Вы полный ...')
+)
+    };console.log (age);
+
+        var resultGen = confirm('ваш пол - мужской?');
+        var gender = (resultGen)? 'мужской': 'женский';
+
+        var resultPen = confirm('вы на пенсии?');
+        var pension = (resultPen)? 'да': 'нет';
+        
+
+        alert('ваше ФИО: ' + surname + ' ' + name + ' ' + patronymic + '\n'
+            + 'ваш возраст в годах: ' + age + '\n'
+            + 'ваш возраст в днях: ' + age * 365 + '\n'
+            + 'через 5 лет вам будет: ' + (age - (-5)) + '\n'
+            + 'ваш пол: ' + gender + '\n'
+            + 'вы на пенсии: ' + pension);
+
+    </script>
+
+</body>
+
+</html>

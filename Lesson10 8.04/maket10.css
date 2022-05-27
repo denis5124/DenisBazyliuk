@@ -1,5 +1,14 @@
 
 
+body {overflow-x: hidden;
+        box-sizing: border-box;}
+
+.maket10 {background-color: #C4C4C4;
+        width: 1428px;
+        margin: 0px auto;
+}
+.contain {margin: 0px 66px 0px 66px;}
+
 .catalog {background-color: white;}
 
 .line {border-bottom: 1px solid #BFBEBE;}
@@ -59,7 +68,7 @@ input {margin-bottom: 11px;
 
 .found {width: 850px;
         height: 44px;
-        float: left;
+        float: right;
         margin-top: 100px;
         margin-right: 56px;
         margin-bottom: 16px;
