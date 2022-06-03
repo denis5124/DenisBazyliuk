@@ -1,0 +1,20 @@
+@media all and (max-width: 1370px) {
+    .maket10 {
+            background-color: white;
+            width: 1296px;
+            margin: 0px auto;}
+        .contain {
+            margin: 0px;
+        }
+}
+
+@media all and (max-width: 1270px) {
+    .maket10 {
+        background-color: white;
+        width: 1296px;
+        margin: 0px auto;
+    }
+    .contain {
+        margin: 0px auto;
+    }
+}
