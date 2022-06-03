@@ -9,12 +9,12 @@ var ul = document.querySelector ('.products ul');
 var htmlStr = '';
 
 for(var i=0; i<cards.length; i++){
-    htmlStr += '
+    htmlStr += `
     <ul>
         <img src="${cards[i].imgUrl" alt = "">
         <p>${cards[i].title}</p>
     </ul>
-    '
+    `
 }
 
 ul.innerHTML = htmlStr
