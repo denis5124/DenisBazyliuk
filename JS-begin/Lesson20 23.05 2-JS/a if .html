@@ -19,35 +19,36 @@
         var patronymic = prompt('Введите вашe отчество:');
         var age
 
-        var ageStr = parseInt (prompt('Сколько вам лет:'));
-            if (!isNaN(ageStr)) {
-                var age = ageStr;
-                console.log(age+2);
+        var age = parseInt (prompt('Сколько вам лет:'));
+            if (!isNaN(age)) {
+                console.log(age);
                 }
-            else var ageStr = prompt('Будьте внимательны. Сколько вам лет:');
-                if (!isNaN(ageStr))
-                    var age = ageStr;
+            else var age = prompt('Будьте внимательны. Сколько вам лет:');
+                if (!isNaN(age))
+                    var age = age;
                 else alert ('Нужно было число, ЧИСЛО. Далее');
 
         var gender;
             var resultGen = confirm('ваш пол - мужской?');
+                console.log (resultGen);
                 if (resultGen)
-                    gender='мужской';
+                    gender = 'мужской';
                 else
                     gender = 'женский';
+            console.log (gender);
         
         var pension;
-            var resultPen = confirm('вы на пенсии?');
-                if (resultPen)
+                if (age>63)
                     pension = 'да';
-                else
-                    pension = 'нет';
-
+                else if ((gender == 'женский') && (age > 58)) pension = 'да';
+                else pension = 'нет';
+                    
+        console.log(gender);
         alert ('ваше ФИО: '+surname+' '+name+' '+ patronymic+'\n'
         +'ваш возраст в годах: '+ age+ '\n'
         +'ваш возраст в днях: '+ age*365+ '\n'
         +'через 5 лет вам будет: '+ (age+5) + '\n'
-        +'ваш пол: '+gender + '\n'
+        +'ваш пол: '+ gender + '\n'
         +'вы на пенсии: '+ pension);
 
     </script>

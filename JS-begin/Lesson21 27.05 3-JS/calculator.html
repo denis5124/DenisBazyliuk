@@ -13,21 +13,21 @@
 <body>
     <input type="button" value="1" onclick="getNumber(1)">
     <input type="button" value="2" onclick="getNumber(2)">
-    <input type="button" value="3" onclick="getNumber(3)">
+    <input type="button" value="3" onclick="getNumber(3)"><Br>
     <input type="button" value="4" onclick="getNumber(4)">
     <input type="button" value="5" onclick="getNumber(5)">
-    <input type="button" value="6" onclick="getNumber(6)">
+    <input type="button" value="6" onclick="getNumber(6)"><Br>
     <input type="button" value="7" onclick="getNumber(7)">
     <input type="button" value="8" onclick="getNumber(8)">
-    <input type="button" value="9" onclick="getNumber(9)">
-    <input type="button" value="0" onclick="getNumber(10)">
+    <input type="button" value="9" onclick="getNumber(9)"><Br>
+    <input type="button" value="0" onclick="getNumber(0)"><Br>
     <input type="button" value="+" onclick="getOperation('+')">
     <input type="button" value="-" onclick="getOperation('-')">
     <input type="button" value="/" onclick="getOperation('/')">
-    <input type="button" value="*" onclick="getOperation('*')">
-    <input type="button" value="=" onclick="getresult()">
+    <input type="button" value="*" onclick="getOperation('*')"><Br>
+    <input type="button" value="=" onclick="getResult('=')">
 
-<script>
+    <script>
     
     var num1=null;
     var num2=null;
@@ -40,13 +40,11 @@
             num2 = x
         }
     }
-
-    function getOperation(x){
-        oper=x
+    function getOperation(y){
+        oper=y
     }
-    
 
-    function res(){
+    function getResult(){
         
     switch(oper){
         case "+": console.log(num1+num2); break;

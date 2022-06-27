@@ -21,17 +21,17 @@
         var patronymic = prompt('Введите вашe отчество:');
         var age
 
-        var ageStr = prompt('Сколько вам лет:');
-        var age = (!isNaN(ageStr))? ageStr: {var : prompt('Будьте внимательны. Сколько вам лет:')
-                (!isNaN(ageStr)) ? ageStr : (alert('Вы полный ...')
+        var age = prompt('Сколько вам лет:');
+        var age = (!isNaN(age))? age: {var : prompt('Будьте внимательны. Сколько вам лет:')
+                (!isNaN(age)) ? age : (alert('Вы полный ...')
 )
     };console.log (age);
 
         var resultGen = confirm('ваш пол - мужской?');
         var gender = (resultGen)? 'мужской': 'женский';
 
-        var resultPen = confirm('вы на пенсии?');
-        var pension = (resultPen)? 'да': 'нет';
+        var pension = (age>63)? 'да': 
+            ((gender == 'женский') && (age > 58))? 'да' : 'нет';
         
 
         alert('ваше ФИО: ' + surname + ' ' + name + ' ' + patronymic + '\n'
