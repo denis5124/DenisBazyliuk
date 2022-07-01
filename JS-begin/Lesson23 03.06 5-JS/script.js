@@ -1,22 +1,9 @@
-var cards = {
-    
-        imgUrl: "images/1_0_a0f3f020-6305-420a-aa4a-975967158fe7 1.png",
-        firm: "Burton:"
-    
+function car(model, color, year, type) {
+    this.model = model;
+    this.color = color;
+    this.year = year;
+    this.type = type
 }
 
-var ul = document.querySelector ('.products ul');
-var htmlStr = '';
-
-for(var i=0; i<cards.length; i++){
-    htmlStr += `
-    <ul>
-        <img src="${cards[i].imgUrl" alt = "">
-        <p>${cards[i].title}</p>
-    </ul>
-    `
-}
-
-ul.innerHTML = htmlStr
-
-console.log ("hello");
+var bmw = new car(320, 'red', 2020);
+var mercedes = new car('GLK', 'black', 2010);
