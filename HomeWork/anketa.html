@@ -1,53 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Anketa</title>
 </head>
+
 <body>
 
     <script>
 
-        var surname = prompt('Введите вашe фамиию:');
-        var name = prompt('Введите вашe имя:');
-        var patronymic = prompt('Введите вашe отчество:');
-        var age
+        let surname = prompt('Введите вашу фамиию:');
+            if (surname && (isNaN (surname)));
+            else surname = prompt('Будьте внимательны. Введите вашу фамилию:')
+                if (surname && (isNaN(surname)));
+                else {alert('Неправильно введена фамилия');
+                    surname = 'не определено;' };
+            console.log(surname);
+
+        let name = prompt('Введите вашe имя:');
+            if (name && (isNaN(name)));
+            else name = prompt('Будьте внимательны. Введите вашe имя:')
+                if (name && (isNaN(name)));
+                else {
+                    alert('Неправильно введено имя');
+                    name = 'не определено;'};
+
+        let patronymic = prompt('Введите вашe отчество:');
+            if (patronymic && (isNaN(patronymic)));
+                else patronymic = prompt('Будьте внимательны. Введите ваше отчество:')
+                if (patronymic && (isNaN(patronymic)));
+                else {
+                    alert('Неправильно введено отчество');
+                    patronymic = 'не определено;'
+                };
+
+        var age;
 
         var age = parseInt(prompt('Сколько вам лет:'));
-        if (!isNaN(age)) {
+            if ((!isNaN(age))&&(0<age<110));
+            else age = parseInt(prompt('Будьте внимательны. Сколько вам лет:'))
+                if ((!isNaN(age))&&(0<age<110));
+                else {alert('Неправильно введен возраст');
+                    age = 'не определено;'};
             console.log(age);
-        }
-        else var age = prompt('Будьте внимательны. Сколько вам лет:');
-        if (!isNaN(age))
-            var age = age;
-        else alert('Нужно было число, ЧИСЛО. Далее');
 
-        var gender;
-        var resultGen = confirm('ваш пол - мужской?');
-        console.log(resultGen);
-        if (resultGen)
-            gender = 'мужской';
-        else
-            gender = 'женский';
-        console.log(gender);
+        let ageInDay;
+            if (age === 'не определено;')
+                ageInDay = age;
+            else ageInDay = age * 365;
 
-        var pension;
-        if (age > 63)
-            pension = 'да';
-        else if ((gender == 'женский') && (age > 58)) pension = 'да';
-        else pension = 'нет';
+        let ageAfter5;
+            if (age === 'не определено;')
+                ageAfter5 = age;
+            else ageAfter5 = age + 5;
 
-        console.log(gender);
+        let gender;
+            let resultGen = confirm('ваш пол - мужской?');
+            if (resultGen)
+                gender = 'мужской';
+            else
+                gender = 'женский';
+
+        let pension;
+            if(age === 'не определено')
+                pension = 'не определено';
+            else
+                if (age > 63)
+                    pension = 'да';
+                else if ((gender == 'женский') && (age > 58)) pension = 'да';
+                else pension = 'нет';
+
         alert('ваше ФИО: ' + surname + ' ' + name + ' ' + patronymic + '\n'
             + 'ваш возраст в годах: ' + age + '\n'
-            + 'ваш возраст в днях: ' + age * 365 + '\n'
-            + 'через 5 лет вам будет: ' + (age + 5) + '\n'
+            + 'ваш возраст в днях: ' + ageInDay + '\n'
+            + 'через 5 лет вам будет: ' + ageAfter5 + '\n'
             + 'ваш пол: ' + gender + '\n'
             + 'вы на пенсии: ' + pension);
 
     </script>
-    
+
 </body>
+
 </html>
