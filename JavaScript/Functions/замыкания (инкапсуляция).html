@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        ffref=null;
+        function f() {
+            var A=5;
+            console.log('локальная для f пременная А='+ A);
+
+            function ff() {
+            var B=20;
+                console.log('локальная для ff пременная B=' + B);
+                console.log ('Замкнутая переменная A='+ A);
+            }
+
+            ff();
+
+            ffref = ff; //сохраняем глобальную ссылку на функцию ff
+
+            A++;
+            console.log('локальная для f пременная А=' + A);
+        }
+
+        f();
+
+        ffref();
+
+    </script>
+</body>
+</html>

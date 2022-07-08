@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function f1() { console.log('Функция f1 вызвана');}
+        var f1ref=f1; //f1ref - переменная типа функция, ссылка на функцию
+        f1ref(); //вызываем функцию по ссылке
+        console.log (typeof f1ref);
+
+        var f2=function () { console.log('Функция f2 вызвана'); }
+        f2();
+        console.log(typeof f2);
+
+        var f3 = function (a) { console.log('Функция f3 вызвана с аргументом '+a); }
+            f3(5);        
+        
+    </script>
+</body>
+</html>

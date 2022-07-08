@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        // через утиный массив arguments.
+        function fff(a) {
+            console.log(a);
+            console.log(arguments.length);
+            for (var i=0; i<arguments.length; i++) {
+                console.log(arguments[i])
+            }
+        }
+        fff("aaa", "bbb");
+
+        // с помощью синтаксиса "оставшихся параметров" ("rest parametres")
+        function fff2(a, b, ...other) {
+                console.log(a);
+                console.log(b);
+                // other - массив всех аргументов после a и b
+                console.log(other.length);
+                for (var i = 0; i < other.length; i++) {
+                    console.log(other[i])
+                }
+            }
+            fff2("aaa", "bbb", "ccc", "ddd");
+
+    </script>
+
+</body>
+</html>
+
