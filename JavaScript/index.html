@@ -4,20 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Treesum</title>
 </head>
 <body>
-
-    <input type='button' value='приветствие' onclick='alert("Добрый день!")'>
-    <br>
-    <input type='button' value='прощание' onclick='goodBye()'>
     
     <script>
+        
+        let tree = [5, 5, 20, 30, 100];
 
-        function goodBye() {
-            alert('До свидания');
+        var result = 0;
+
+        function treeSum () {
+            
+            for (i=0; i< tree.length; i++) {
+                result += tree[i];
+            }
+            return result;
         }
 
+        console.log(treeSum(tree));
     </script>
 
 </body>
