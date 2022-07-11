@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+var str = "This website is for losers LOL!";
+
+function disemvowel(n) {
+  
+    var str2 = '';
+
+    var vowel = ['A', 'a', 'E', 'e', 'I', 'i', 'O', 'o', 'U', 'u'];
+
+    for (let i=0; i<n.length; i++) {
+        if (vowel.includes(n[i])) {
+            continue;
+        }
+        else str2+=n[i];
+    }
+
+return str2;
+}
+console.log (str);
+    </script>
+
+</body>
+</html>
