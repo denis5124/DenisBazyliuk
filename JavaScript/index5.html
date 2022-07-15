@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treesum2</title>
+</head>
+
+<body>
+
+    <script>
+    const result = [];
+        const flatten = (element) => {
+                for (const i of element) {
+                    // Array.isArray — функция-предикат стандартной библиотеки,
+                    // которая проверяет, является ли значение массивом.
+                    if (Array.isArray(i)) {
+                        // Если значение массив, то проходим по всем его элементам
+                        // Здесь появился вложенный цикл
+                        for (const arrI of i) {
+                            // и добавляем их в результирующий массив
+                            result.push(arrI);
+                        }
+                    } else {
+                        // Если значение не массив, то сразу добавляем его в результирующий массив
+                        result.push(i);
+                    }
+                for (j = 0; j < result.length; j++) {
+                    if (Array.isArray(j)) {
+                        flatten(result);
+                    }else{
+                        return result;
+                    }
+                }
+                }
+            }
+        
+            
+
+            console.log(flatten([3, 2, [], [3, 4, 2], 3, [123, [3, 5]]]));
+
+    </script>
+
+</body>
+
+</html>
