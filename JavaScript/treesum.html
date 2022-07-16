@@ -11,9 +11,9 @@
 <body>
 
     <script>
-    
-    const getTreeSum = (tree) => {
-        let result=0;
+
+        const getTreeSum = (tree) => {
+            let result = 0;
 
             const flatten = (element) => {
 
@@ -26,14 +26,14 @@
                     }
                 }
             }
-            flatten (tree);
+            flatten(tree);
             return result;
         }
 
-   console.log (getTreeSum([5, 7,
-        [4, [2], 8, [1, 3], 2],
-        [9, []],
-        1, 8]));
+        console.log(getTreeSum([5, 7,
+            [4, [2], 8, [1, 3], 2],
+            [9, []],
+            1, 8]));
 
     </script>
 
