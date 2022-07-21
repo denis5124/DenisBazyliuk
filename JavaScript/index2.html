@@ -21,6 +21,7 @@
 
             function getTreeSum(n) {
                 for (i = 0; i < n.length; i++) {
+                    console.log (n[i]);
                     if (Array.isArray(n[i])) {
                         return getTreeSum(n[i]);
                     }
