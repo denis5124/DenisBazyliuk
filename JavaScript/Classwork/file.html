@@ -13,17 +13,20 @@
     let str = "ZpglnRxqenU";
 
     function accum(n) {
-
-        let res = '';
+        
         let strLow = n.toLowerCase();
+        let letStrLow = strLow.split('');
         console.log (strLow);
+        console.log(letStrLow);
 
-        for (let i=0; i<n.length; i++); {
-            
+        for (let j=0; j< letStrLow.length; j++); {
+            console.log ('Мне '+j+'лет');
+            let repeat = letStrLow[i].repeat(i);
         }
+        
     }
 
-    console.log(accum(str));
+    accum(str);
 
     </script>
 
