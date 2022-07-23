@@ -14,9 +14,9 @@ var str = "This website is for losers LOL!";
 
 function disemvowel(n) {
   
-    var str2 = '';
+    let str2 = '';
 
-    var vowel = ['A', 'a', 'E', 'e', 'I', 'i', 'O', 'o', 'U', 'u'];
+    const vowel = ['A', 'a', 'E', 'e', 'I', 'i', 'O', 'o', 'U', 'u'];
 
     for (let i=0; i<n.length; i++) {
         if (vowel.includes(n[i])) {
@@ -27,7 +27,7 @@ function disemvowel(n) {
 
 return str2;
 }
-console.log (str);
+console.log (disemvowel(str));
     </script>
 
 </body>
