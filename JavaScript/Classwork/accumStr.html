@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+    let str = "ZpglnRxqenU";
+
+    function accum(n) {
+
+        let strLow = n.toLowerCase();
+        let arrStrLow = strLow.split('');
+        let result='';
+        
+        console.log(strLow);
+        console.log(arrStrLow);
+        for (let i = 0; i < arrStrLow.length; i++) {
+            let repeatLet = arrStrLow[i].repeat(i+1);
+            if (repeatLet.length===1) {
+                var firstLet = repeatLet.toUpperCase();
+                console.log(firstLet)
+            }
+            else {
+                var upperFirst = repeatLet[0].toUpperCase() + repeatLet.slice(1);
+                console.log(upperFirst);
+                result+= '-'+upperFirst;
+            }
+        }
+    return (firstLet + result);
+    }
+        
+    
+
+    console.log(accum(str));
+
+    </script>
+
+</body>
+</html>
