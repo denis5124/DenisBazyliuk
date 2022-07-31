@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        "use strict"
+
+        class AeroCar {
+            constructor (carNum) {
+                this.num=carNum;
+            }
+
+            beep() {
+                console.log (`aerocar num: ${this.num} beeep!`);
+            }
+        }
+
+        const car5=new AeroCar ('AAA-555');
+        car5.beep();
+
+    </script>
+</body>
+</html>

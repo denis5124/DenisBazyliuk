@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        function MotorCar (CarNum) {
+            const self=this;
+            self.num=CarNum;
+            self.beep=function () {
+                console.log (`motocar num: ${self.num} beeep`);
+            }
+        }
+
+        const car=new MotorCar('1-A');
+        console.log (car.num);
+        car.beep();
+
+        car.color='red';
+        console.log(car.color);
+        console.log('color' in car);
+
+        console.log('строка: ' + car);
+
+    </script>
+
+</body>
+</html>

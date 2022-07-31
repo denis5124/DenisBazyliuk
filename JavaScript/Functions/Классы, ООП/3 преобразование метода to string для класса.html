@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        function RaceCar(carNum) {
+            const self=this;
+            self.num=carNum;
+            self.toString=function() {
+                return (`racecar num = ${self.num}`);
+            }
+        }
+
+        const car=new RaceCar('1-A');
+        console.log ('строка: ' + car);
+
+        console.log (car instanceof RaceCar);
+        console.log (car instanceof String);
+
+        console.log (typeof car);
+        console.log (typeof {a:5,b:6});
+
+    </script>
+
+</body>
+</html>
