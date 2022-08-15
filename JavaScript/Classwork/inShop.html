@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" name="phoneName" value="Nokia 3310"><br>
+    <input type="text" name="imgUrl" value=""><br>
+    <textarea name="text" id="" cols="30" rows="10"></textarea>
+
+    <button onclick="addItem()">add</button>
+
+    <button onclick="render()">render</button>
+
+    <div id="app"></div>
+
+    <script>
+        const items = []
+
+        const addItem = () => {
+            const phoneName = document.querySelector('input[name=phoneName]').value
+            const imgUrl = document.querySelector('input[name=imgUrl]').value
+
+            const obj = {
+                phoneName,
+                imgUrl
+            }
+
+            items.push(id)
+
+        }
+
+        const render = () => {
+            const htmlText = items.reduce ((acc, item) => {
+                return `${acc} <div class = 'card' style
+                    <img src = '${item.phoneName}' class=
+                    <div class = 'card-body'>
+                        
+             }
+        }
+    
+
+    </script>
+</body>
+</html>
