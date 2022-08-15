@@ -8,8 +8,20 @@
 </head>
 <body>
     
+    
+    <input type="text" name="H1" value=""> 
+    <input type=button id="createH1" value="" onclick="createH1()">
+    
+    <br>
+
     <script>
-        let number = 10;
+        function createH1() {
+        const text1=document.querySelector('input[name=H1]').value;
+        console.log (text1);
+        const tagH1 = document.createElement('H1');
+        const a = document.createTextNode('text1');
+        tagH1.appendChild(a);
+    }
     </script>
 
 </body>
