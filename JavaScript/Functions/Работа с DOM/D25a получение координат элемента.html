@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <style>
+        #RED {
+            background-color: red;
+        }
+    </style>
+    
+    <div id='RED' style='margin-top: 100px; margin-left: 60px; width: 20em; height: 20mm'></div>
+    
+    <script>
+
+        const elem = document.getElementById('RED');
+        function getElementPos(elem) {
+                const bbox = elem.getBoundingClientRect();
+                return {
+                    left: bbox.left + window.pageXOffset,
+                    top: bbox.top + window.pageYOffset
+                };
+            }
+        console.log(getElementPos(elem));
+
+        elem.style.left='500 px';
+
+
+    </script>
+
+</body>
+</html>

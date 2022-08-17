@@ -10,23 +10,23 @@
     
     <script>
 
-        let str = prompt ('введите любую сстроку');
-        console.log(str[0]);
+        let str = prompt('введите любую сстроку');
 
-        function clearStr (n) {
+        function clearStr(n) {
             let clearStrBeg = n;
-            if (clearStrBeg[0] === 'a') {
-                console.log(111111);
+            console.log(clearStrBeg);
+            if (clearStrBeg[0] !== 'a') 
+                return (12);
+
+            else {
                 let newStrBeg = clearStrBeg.slice(1);
                 console.log(newStrBeg);
-                clearStr(newStrBeg);
+                clearStr(clearStrBeg.slice(1));
             }
-            else 
-                return clearStrBeg;
-debugger;
         }
-        
-        console.log(`*${clearStr(str)}*`);
+
+        let fun = clearStr(str);
+        console.log (fun);
 
     </script>
 
