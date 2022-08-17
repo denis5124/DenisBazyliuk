@@ -10,18 +10,47 @@
     
     
     <input type="text" name="H1" value=""> 
-    <input type=button id="createH1" value="" onclick="createH1()">
-    
-    <br>
+    <input type=button value="" onclick="createH1()">
+    <div id="h1"></div>
+
+    <input type="text" name="P" value="">
+    <input type=button value="" onclick="createP()">
+    <div id="P"></div>
+
+    <input type="text" name="Span" value="">
+    <input type=button value="" onclick="createSpan()">
+    <div id="Span"></div>
 
     <script>
         function createH1() {
-        const text1=document.querySelector('input[name=H1]').value;
-        console.log (text1);
-        const tagH1 = document.createElement('H1');
-        const a = document.createTextNode('text1');
-        tagH1.appendChild(a);
-    }
+            const h1Element = document.getElementById('h1');
+            const text1=document.querySelector('input[name=H1]').value;
+            console.log (text1);
+            const tagH1 = document.createElement('h1');
+            const a = document.createTextNode(text1);
+            tagH1.appendChild(a);
+            h1Element.appendChild(tagH1);
+        }
+
+        function createP() {
+            const pElement = document.getElementById('P');
+            const text1=document.querySelector('input[name=P]').value;
+            console.log (text1);
+            const tagP = document.createElement('p');
+            const a = document.createTextNode(text1);
+            tagP.appendChild(a);
+            pElement.appendChild(tagP);
+        }
+
+        function createSpan() {
+            const spanElement = document.getElementById('Span');
+            const text1 = document.querySelector('input[name=Span]').value;
+            console.log(text1);
+            const tagSpan = document.createElement('span');
+            const a = document.createTextNode(text1);
+            tagSpan.appendChild(a);
+            spanElement.appendChild(tagSpan);
+        }
     </script>
 
 </body>
