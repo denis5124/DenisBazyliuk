@@ -21,8 +21,13 @@
     <input type=button value="" onclick="createSpan()">
     <div id="Span"></div>
 
+    <input type="text" name="Li" value="">
+    <input type=button value="" onclick="createLi()">
+    <div id="Li"></div>
+
     <script>
         function createH1() {
+            debugger;
             const h1Element = document.getElementById('h1');
             const text1=document.querySelector('input[name=H1]').value;
             console.log (text1);
@@ -50,6 +55,16 @@
             const a = document.createTextNode(text1);
             tagSpan.appendChild(a);
             spanElement.appendChild(tagSpan);
+        }
+
+        function createLi() {
+            const liElement = document.getElementById('Li');
+            const text1 = document.querySelector('input[name=Li]').value;
+            console.log(text1);
+            const tagLi = document.createElement('li');
+            const a = document.createTextNode(text1);
+            tagLi.appendChild(a);
+            liElement.appendChild(tagLi);
         }
     </script>
 
