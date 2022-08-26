@@ -10,25 +10,40 @@
     
     <div id='RED' style='position: relative; left: 100px; top: 100px;
     width: 300px; height: 300px; background-color: red'>
+    
         <div id='Yellow' style='position: absolute; left: 10px; top: 20px;
         width: 50px; height: 50px; background-color: yellow'>
         </div>
+        
     </div>
 
     <script>
+        
         const Yellow = document.getElementById('Yellow');
 
-        let leftCoordinate = 0;
-        let topCoordinate = 0;
+        let leftCoordinate = 10;
+        let topCoordinate = 20;
 
         window.addEventListener('keydown', (e) => {
             console.log('-e', e.keyCode);
 
             switch (e.keyCode) {
-                case 39: leftCoordinate+=5; break;
-                case 37: leftCoordinate-=5; break;
-                case 38: topCoordinate+=5; break;
-                case 36: topCoordinate-=5; break;
+                case 39: if (leftCoordinate == 250) {
+                            leftCoordinate = 0;
+                        }
+                        else leftCoordinate+=5; break;
+                case 37: if (leftCoordinate == 0) {
+                            leftCoordinate = 250;
+                        }
+                        else leftCoordinate-=5; break;
+                case 40: if (topCoordinate == 250) {
+                            topCoordinate = 0;
+                        }
+                        else topCoordinate+=5; break;
+                case 38: if (topCoordinate == 0) {
+                            topCoordinate = 250;
+                        }
+                        else topCoordinate-=5; break;
             }
             Yellow.style.left = leftCoordinate + 'px';
             Yellow.style.top = topCoordinate + 'px';
