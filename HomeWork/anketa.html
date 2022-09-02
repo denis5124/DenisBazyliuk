@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anketa</title>
+</head>
+
+<body>
+
+    <script>
+
+        let surname = prompt('Введите вашу фамиию:');
+        if (surname && (isNaN(surname)));
+        else surname = prompt('Будьте внимательны. Введите вашу фамилию:')
+        if (surname && (isNaN(surname)));
+        else {
+            alert('Неправильно введена фамилия');
+            surname = 'не определено;'
+        };
+        console.log(surname);
+
+        let name = prompt('Введите вашe имя:');
+        if (name && (isNaN(name)));
+        else name = prompt('Будьте внимательны. Введите вашe имя:')
+        if (name && (isNaN(name)));
+        else {
+            alert('Неправильно введено имя');
+            name = 'не определено;'
+        };
+
+        let patronymic = prompt('Введите вашe отчество:');
+        if (patronymic && (isNaN(patronymic)));
+        else patronymic = prompt('Будьте внимательны. Введите ваше отчество:')
+        if (patronymic && (isNaN(patronymic)));
+        else {
+            alert('Неправильно введено отчество');
+            patronymic = 'не определено;'
+        };
+
+        var age;
+
+        var age = parseInt(prompt('Сколько вам лет:'));
+        if ((!isNaN(age)) && (0 < age < 110));
+        else age = parseInt(prompt('Будьте внимательны. Сколько вам лет:'))
+        if ((!isNaN(age)) && (0 < age < 110));
+        else {
+            alert('Неправильно введен возраст');
+            age = 'не определено;'
+        };
+        console.log(age);
+
+        let ageInDay;
+        if (age === 'не определено;')
+            ageInDay = age;
+        else ageInDay = age * 365;
+
+        let ageAfter5;
+        if (age === 'не определено;')
+            ageAfter5 = age;
+        else ageAfter5 = age + 5;
+
+        let gender;
+        let resultGen = confirm('ваш пол - мужской?');
+        if (resultGen)
+            gender = 'мужской';
+        else
+            gender = 'женский';
+
+        let pension;
+        if (age === 'не определено')
+            pension = 'не определено';
+        else
+            if (age > 63)
+                pension = 'да';
+            else if ((gender == 'женский') && (age > 58)) pension = 'да';
+            else pension = 'нет';
+
+        alert('ваше ФИО: ' + surname + ' ' + name + ' ' + patronymic + '\n'
+            + 'ваш возраст в годах: ' + age + '\n'
+            + 'ваш возраст в днях: ' + ageInDay + '\n'
+            + 'через 5 лет вам будет: ' + ageAfter5 + '\n'
+            + 'ваш пол: ' + gender + '\n'
+            + 'вы на пенсии: ' + pension);
+
+    </script>
+
+</body>
+
+</html>
