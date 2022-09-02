@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="red" style='border: solid red 1px; width: 30px; height: 30px; background-color: red; margin-bottom: 30px;'> 1</div>
+    <div id="yellow" style='border: solid yellow 1px; width: 30px; height: 30px; background-color: yellow; margin-bottom: 30px'> 2</div>
+    <div id="green" style='border: solid green 1px; width: 30px; height: 30px; background-color: green; margin-bottom: 30px'> 3</div>
+    <div id="blue" style='border: solid blue 1px; width: 30px; height: 30px; background-color: blue; margin-bottom: 30px'> 4</div>
+    
+    <div style='border: solid black 1px; width: 300px; height: 300px'  
+        ondrop="divDrop(event)"
+        ondragover="divDragOver(event)"> basket</div>
+
+    <script>
+        function divDragOver(eo) {
+            eo=eo||window.event;
+            // по-умолчанию ронять элементы в div запрещено, отменяем:
+            eo.preventDefault();
+        }
+
+        function divDrop(eo) {
+            // мячик уронен
+            eo=eo||window.event;
+            eo.preventDefault();
+            // что уронено? this не пойдёт, drop - это событие div-а!
+            const dragElem=document.getElementById('red');
+            // куда уронено?
+            // eo.target не пойдёт - это не всегда div, например если мячик в div-е чуть
+            // сдвинуть и уронить НА САМОГО СЕБЯ - то eo.target будет сам мячик
+            // eo.currentTarget - всегда тот элемент, у которого вызван обработчик события
+            eo.currentTarget.appendChild(dragElem);
+        }
+    </script>
+</body>
+</html>
