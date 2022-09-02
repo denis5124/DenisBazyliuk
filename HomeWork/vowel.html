@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vowel</title>
+</head>
+
+<body>
+
+    <script>
+
+        const str = prompt('Ведите текст');
+
+        function amountVowel(n) {
+
+
+            let str2 = '';
+
+            const vowel = ['А', 'а', 'Е', 'е', 'Ё', 'ё', 'И', 'и', 'О', 'о', 'У', 'у', 'Ы', 'ы', 'Э', 'э', 'Ю', 'ю', 'Я', 'я'];
+
+            for (let i = 0; i < n.length; i++) {
+                if (vowel.includes(n[i])) {
+                    str2 += n[i];
+                }
+            }
+            console.log(str2);
+            return str2.length;
+        }
+        console.log(amountVowel(str));
+
+
+    </script>
+
+</body>
+
+</html>
