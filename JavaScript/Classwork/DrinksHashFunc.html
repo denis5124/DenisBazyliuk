@@ -62,12 +62,11 @@
                 info.appendChild(nameTeg);
             }
 
-            this.delInfo = function (name) {
-                delete drink[name].ingridients;
-                delete drink[name].isAlco;
+            this.delDrink = function (name) {
+                delete drink[name];
                 console.log(drink);
             }
-
+            
             this.getList = function () {
                 for (let k in drink)
                     console.log(k);
@@ -79,11 +78,8 @@
         function addDrinkFunc() {
 
             const drinkName = document.querySelector('[name="drinkName"]');
-            console.log(drinkName.value);
             const ingridients = document.querySelector('[name="ingridients"]');
             const alco = document.querySelector('[name="isAlco"]');
-            console.log(ingridients.value);
-            console.log(alco.checked);
             drinkHash.addDrink(drinkName.value, alco.checked, ingridients.value.split(','));
 
         }
@@ -100,7 +96,7 @@
 
             const drinkName = document.querySelector('[name="drinkName"]');
             const drinkNameValue = drinkName.value;
-            drinkHash.delInfo(drinkName.value);
+            drinkHash.delDrink(drinkName.value);
 
         }
 
