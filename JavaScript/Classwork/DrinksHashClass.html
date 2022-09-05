@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drinks</title>
+
+    <style>
+        [type="button"] {
+            background-color: rgb(200, 255, 0);
+            width: 250px;
+            margin-top: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px #999;
+        }
+
+        [type="button"]:hover {
+            background-color: rgb(20, 255, 126);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <input type="text" name='drinkName' placeholder="введите напиток">
+        <input type="text" name='ingridients' placeholder="введите ингридиенты">
+        <input type="checkbox" name="isAlco" checked>
+        <p style="display: inline-block">наличие алкоголя</p><br>
+        <input type="button" value="ввод информации о напитке" onclick="addDrinkFunc()"><br>
+        <input type="button" value="получение информации о напитке" onclick="getInfoDrinkFunc()"><br>
+        <input type="button" value="удаление информации о напитке" onclick="delDrinkFunc()"><br>
+        <input type="button" value="перечень всех напитков" onclick="getListDrinkFunc()"><br>
+    </div>
+
+    <script>
+
+        "use strict";
+
+        class HashStorageClass {
+            constructor() {
+                drink = {
+                    'b-52': {
+                        isAlco: true,
+                        ingridients: ['lemon', 'water', 'rom']
+                    },
+                    'moxito': {
+                        isAlco: false,
+                        ingridients: ['lemon', 'water', 'vodka']
+                    },
+                };
+            }
+
+                addDrink(name, isAlco, ingridients) {
+                    console.log(drink[name]);
+                    drink[name] = { isAlco, ingridients };
+                        console.log(drink);
+                    }
+
+                getInfo(name)
+                    {const info = document.querySelector("div");
+                        const nameTeg = document.createElement("p");
+                        const nameText = document.createTextNode(`Напиток: ${name} / алкогольный: ${drink[name].isAlco} / состав: ${drink[name].ingridients}`);
+                        nameTeg.appendChild(nameText);
+                        info.appendChild(nameTeg);
+                    }
+
+                delDrink(name)
+                    {delete drink[name];
+                        console.log(drink);
+                    }
+                
+                getList()
+                    {for (let k in drink)
+                            console.log(k);
+                    }
+            
+        }
+
+        const drinkHash = new HashStorageClass ();
+
+        function addDrinkFunc() {
+
+            const drinkName = document.querySelector('[name="drinkName"]');
+            const ingridients = document.querySelector('[name="ingridients"]');
+            const alco = document.querySelector('[name="isAlco"]');
+            drinkHash.addDrink(drinkName.value, alco.checked, ingridients.value.split(','));
+
+        }
+
+        function getInfoDrinkFunc() {
+
+            const drinkName = document.querySelector('[name="drinkName"]');
+            const drinkNameValue = drinkName.value;
+            drinkHash.getInfo(drinkName.value);
+
+        }
+
+        function delDrinkFunc() {
+
+            const drinkName = document.querySelector('[name="drinkName"]');
+            const drinkNameValue = drinkName.value;
+            drinkHash.delDrink(drinkName.value);
+
+        }
+
+        function getListDrinkFunc() {
+
+            const drinkName = document.querySelector('[name="drinkName"]');
+            const drinkNameValue = drinkName.value;
+            drinkHash.getList();
+
+        }
+
+    </script>
+</body>
+
+</html>
