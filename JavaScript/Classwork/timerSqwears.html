@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id='RED' style='position: relative; left: 100px; top: 100px;
+    width: 300px; height: 300px; background-color: red'>
+
+        <div id='Yellow' style='position: absolute; left: 10px; top: 10px;
+        width: 50px; height: 50px; background-color: yellow'>
+        </div>
+
+    </div>
+
+    <script>
+
+        let leftPosition = 20;
+        let topPosition = 20;
+        let timer = 0;
+
+        function start(direction) {
+            let n = direction;
+            if (timer) {
+                clearInterval(timer);
+            }
+            timer = setInterval(n, 50);
+        }
+
+        function right() {
+            leftPosition++;
+            document.getElementById('Yellow').style.left =
+                leftPosition + "px";
+            if (leftPosition >= 250) {
+                leftPosition = 0;
+            }
+        }
+
+        function left() {
+            leftPosition--;
+            document.getElementById('Yellow').style.left =
+                leftPosition + "px";
+            if (leftPosition <= 0) {
+                leftPosition = 250;
+            }
+        }
+
+        function up() {
+            topPosition--;
+            document.getElementById('Yellow').style.top =
+                topPosition + "px";
+            if (topPosition <= 0) {
+                topPosition = 250;
+            }
+        }
+
+        function bottom() {
+            topPosition++;
+            document.getElementById('Yellow').style.top =
+                topPosition + "px";
+            if (topPosition >= 250) {
+                topPosition = 0;
+            }
+        }
+
+        
+
+        window.addEventListener('keydown', (e) => {
+            console.log('-e', e.keyCode);
+
+            switch (e.keyCode) {
+                case 39: start(right); break;
+                case 37: start(left); break;
+                case 40: start(bottom); break;
+                case 38: start(up); break;
+            }
+        })
+
+    </script>
+
+</body>
+
+</html>
