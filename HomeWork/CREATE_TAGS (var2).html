@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        div {
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        .button {display: inline}
+
+    </style>
+
+</head>
+
+<body>
+
+    
+    <input type="button" value="создать h1" onclick=" createInput ('H1', 'buttonH1')">
+    <input id="H1" type="text" placeholder="введите текст" value="">
+    <div id="buttonH1" class="button" onclick="createH ('h1','H1')" value=""></div>
+    <div id="h1"></div>
+    
+    <input type="button" value="создать h2" onclick=" createInput ('H2', 'buttonH2')">
+    <input id="H2" type="text" placeholder="введите текст" value="">
+    <div id="buttonH2" class="button" onclick="createH ('h2','H2')" value=""></div>
+    <div id="h2"></div>
+
+    <input type="button" value="создать h3" onclick=" createInput ('H3', 'buttonH3')">
+    <input id="H3" type="text" placeholder="введите текст" value="">
+    <div id="buttonH3" class="button" onclick="createH ('h3','H3')" value=""></div>
+    <div id="h3"></div>
+
+    <input type="button" value="создать h4" onclick=" createInput ('H4', 'buttonH4')">
+    <input id="H4" type="text" placeholder="введите текст" value="">
+    <div id="buttonH4" class="button" onclick="createH ('h4','H4')" value=""></div>
+    <div id="h4"></div>
+
+    <input type="button" value="создать h5" onclick=" createInput ('H5', 'buttonH5')">
+    <input id="H5" type="text" placeholder="введите текст" value="">
+    <div id="buttonH5" class="button" onclick="createH ('h5','H5')" value=""></div>
+    <div id="h5"></div>
+
+    <input type="button" value="создать h6" onclick=" createInput ('H6', 'buttonH6')">
+    <input id="H6" type="text" placeholder="введите текст" value="">
+    <div id="buttonH6" class="button" onclick="createH ('h6','H6')" value=""></div>
+    <div id="h6"></div>
+
+    <input type="button" value="создать  p" onclick=" createInput ('P', 'buttonP')">
+    <input id="P" type="text" placeholder="введите текст" value="">
+    <div id="buttonP" class="button" onclick=" createH ('p','P')"></div>
+    <div id="p"></div>
+
+    <input type="button" value="создать span" onclick=" createInput ('Span', 'buttonSpun')">
+    <input id="Span" type="text" placeholder="введите текст" value="">
+    <div id="buttonSpun" class="button" onclick=" createH ('span','Span')"></div>
+    <div id="span"></div>
+
+    <input type="button" value="Ol /создать li" onclick=" createInput ('Li','buttonLi')">
+    <input id="Li" type="text" placeholder="введите текст" value="">
+    <div id="buttonLi" class="button" onclick=" createH ('li','Li')">
+    <ol id="li"></ol>
+
+    <script>
+
+    function createInput (divIdIn, divIdBut) {
+        const elementIn = document.getElementById(divIdIn);
+        const createTagIn = document.createElement('input');
+        elementIn.appendChild(createTagIn);
+
+
+        const elementBut = document.getElementById(divIdBut);
+        const createTagBut = document.createElement('button');
+        const createTextBut = document.createTextNode('+');
+        createTagBut.appendChild(createTextBut);
+        elementBut.appendChild(createTagBut);
+    }
+
+    function createH(divId, inId) {
+            const element = document.getElementById(divId);
+            const getTextInput = document.getElementById(inId).value;
+            const createTag = document.createElement(divId);
+            const createText = document.createTextNode(getTextInput);
+            createTag.appendChild(createText);
+            element.appendChild(createTag);
+        }
+
+    </script>
+
+</body>
+
+</html>
