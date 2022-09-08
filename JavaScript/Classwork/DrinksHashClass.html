@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drinks</title>
+    <title>DrinksClass</title>
 
     <style>
         [type="button"] {
@@ -39,9 +39,10 @@
 
         "use strict";
 
-        class HashStorageClass {
-            constructor() {
-                drink = {
+        class HashStorageFunc {
+
+            constructor () {
+                this.drink = {
                     'b-52': {
                         isAlco: true,
                         ingridients: ['lemon', 'water', 'rom']
@@ -51,35 +52,35 @@
                         ingridients: ['lemon', 'water', 'vodka']
                     },
                 };
-            }
-
-                addDrink(name, isAlco, ingridients) {
-                    console.log(drink[name]);
-                    drink[name] = { isAlco, ingridients };
-                        console.log(drink);
-                    }
-
-                getInfo(name)
-                    {const info = document.querySelector("div");
-                        const nameTeg = document.createElement("p");
-                        const nameText = document.createTextNode(`Напиток: ${name} / алкогольный: ${drink[name].isAlco} / состав: ${drink[name].ingridients}`);
-                        nameTeg.appendChild(nameText);
-                        info.appendChild(nameTeg);
-                    }
-
-                delDrink(name)
-                    {delete drink[name];
-                        console.log(drink);
-                    }
-                
-                getList()
-                    {for (let k in drink)
-                            console.log(k);
-                    }
+            };
             
+
+                addDrink (name, isAlco, ingridients) {
+                    this.drink[name] = { isAlco, ingridients };
+                    console.log(this.drink);
+                }
+
+                getInfo (name) {
+                    const info = document.querySelector("div");
+                    const nameTeg = document.createElement("p");
+                    const nameText = document.createTextNode(`Напиток: ${name} / алкогольный: ${this.drink[name].isAlco} / состав: ${this.drink[name].ingridients}`);
+                    nameTeg.appendChild(nameText);
+                    info.appendChild(nameTeg);
+                }
+
+                delDrink (name) {
+                    delete this.drink[name];
+                    console.log(this.drink);
+                }
+
+                getList () {
+                    for (let k in this.drink)
+                        console.log(k);
+                }
+           
         }
 
-        const drinkHash = new HashStorageClass ();
+        const drinkHash = new HashStorageFunc();
 
         function addDrinkFunc() {
 
