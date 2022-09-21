@@ -63,12 +63,62 @@ const model = {
     }
 }
 
-model.fire("53");
-model.fire("06");
-model.fire("16");
-model.fire("26");
-model.fire("63");
-model.fire("24");
-model.fire("34");
-model.fire("44");
-// приказываем представлению, вывести сообщение о промахе
+// объект контроллер
+const controller = {
+    guesses: 0, // объявляется свойство "попытки", которое инициализируется нулем
+
+    processGuess: function (guess) { // обработка координат выстрела и передача их модели
+        let location = parseGuess(guess); // если не получен null значит координаты введены верно
+        if (location) {
+            this.guesses++; // увеличение счётчика числа выстрелов на 1
+            let hit = model.fire(location); // при попадании переменная hit получает true от метода fire
+                // если попадание и при этом кол-во потопленных равно кол-ву учавствовавших - сообщение
+            if (hit && model.shipsSunk === model.numShips) { 
+                view.displayMessage("You sank all my battleships, in " + this.guesses + " guesses");
+            }
+        }
+    }
+}
+
+function parseGuess(guess) { // функция получения координат
+    const alphabet = ["A", "B", "C", "D", "E", "F", "G"]; // массив с буквами, которые могут присутствовать в координатах
+
+    if (guess === null || guess.length !== 2) { // проверка на null и что в строке 2 символа
+        alert("Oops, please enter a letter and a number on the board.");
+    }
+    else {
+        firstChar = guess.charAt(0); // извлекает первый символ строки
+        let row = alphabet.indexOf(firstChar); // получаем цифру от 0 до 6, соотвествующую букве
+        let column = guess.charAt(1); // добавляется код для получения второго символа, представлящего столбец игрового поля
+        if (isNaN(row) || isNaN(column)) { // проверка явлются ли цифрами строки и столбцы
+            alert("Oops, that isn't on the board.");
+        }
+        // проверка влазят ли полученные цифры в диапазон игрового поля (см. объект модели)
+        else if (row < 0 || row >= model.boardSize || column < 0 || column >= model.boardSize) {
+            alert("Oops, that's off the board!");
+        }
+        else {
+            return row + column;
+        }
+    }
+    return null; // проверки не пройдены, возвращается null
+}
+
+function init() {
+    const firebutton = document.getElementById("fireButton"); // получение ссылки на кнопку Fire
+    firebutton.onclick = handleFireButton; // назначается обработчик события - функция handleFireButton
+}
+
+function handleFireButton() {
+    let guessInput = document.getElementById("guessInput");
+    let guess = guessInput.value; // извлечение введённых координат
+    controller.processGuess(guess); // передача введённых координат контроллеру
+    guessInput.value = ""; // команда удаляет содержимое input формы
+}
+
+window.onload = init; // передача введённых координат контроллеру
+
+
+
+
+// команда удаляет содержимое input формы
