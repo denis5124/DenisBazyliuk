@@ -104,11 +104,6 @@ function parseGuess(guess) { // функция получения координ
     return null; // проверки не пройдены, возвращается null
 }
 
-function init() {
-    const firebutton = document.getElementById("fireButton"); // получение ссылки на кнопку Fire
-    firebutton.onclick = handleFireButton; // назначается обработчик события - функция handleFireButton
-}
-
 function handleFireButton() {
     let guessInput = document.getElementById("guessInput");
     let guess = guessInput.value; // извлечение введённых координат
@@ -116,9 +111,24 @@ function handleFireButton() {
     guessInput.value = ""; // команда удаляет содержимое input формы
 }
 
+function handleKeyPress(e) { // обработчик нажатий клавиш; // (e)-какая клавиша была нажата
+    const fireButton = document.getElementById("fireButton"); // получение ссылки на кнопку Fire
+    if (e.keyCode === 13) { // нажатие Enter = 13
+        fireButton.onclick(); // вызывается функция и кнопка Fire! работает как-будто по ней нажали
+        return false;
+    }
+}
+
 window.onload = init; // передача введённых координат контроллеру
 
+function init() {
+    let fireButton = document.getElementById("fireButton"); // получение ссылки на кнопку Fire
+    fireButton.onclick = handleFireButton; // назначается обработчик события - функция handleFireButton
+    let guessInput = document.getElementById("guessInput"); // получение ссылки на поле ввода координат
+    guessInput.onkeydown = handleKeyPress; // назначается обработчик события - функция handleKeyPress
+}
 
 
 
-// команда удаляет содержимое input формы
+
+// что бы форма ничего больше не делала
