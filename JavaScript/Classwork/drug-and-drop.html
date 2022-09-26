@@ -4,56 +4,86 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>drug&drop</title>
+
+    <style>
+
+        #red{
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            margin: 30px;
+        }
+
+        #yellow{
+            width: 30px;
+            height: 30px;
+            background-color: yellow;
+            margin: 30px;
+        }
+
+        #green{
+            width: 30px;
+            height: 30px;
+            background-color: green;
+            margin: 30px;
+        }
+
+        #blue{
+            width: 30px;
+            height: 30px;
+            background-color: blue;
+            margin: 30px;
+        }
+
+        .basket{
+            width: 150px;
+            height: 150px;
+            background-color: gray;
+            margin-top: 150px;
+        }
+
+    </style>
+
 </head>
+
 <body>
     
-    <div id="red" style='border: solid red 1px; width: 30px; height: 30px; background-color: red; margin-bottom: 30px' ondragstart="ballDragStart(event)"
-    ondragend="ballDragEnd(event)"> 1</div>
-    <div id="yellow" style='border: solid yellow 1px; width: 30px; height: 30px; background-color: yellow; margin-bottom: 30px'
-    ondragstart="ballDragStart(event)"
-    ondragend="ballDragEnd(event)"> 2</div>
-    <div id="green" style='border: solid green 1px; width: 30px; height: 30px; background-color: green; margin-bottom: 30px'
-    ondragstart="ballDragStart(event)"
-    ondragend="ballDragEnd(event)"> 3</div>
-    <div id="blue" style='border: solid blue 1px; width: 30px; height: 30px; background-color: blue; margin-bottom: 30px'
-    ondragstart="ballDragStart(event)"
-    ondragend="ballDragEnd(event)"> 4</div>
-    
-    <div style='border: solid black 1px; width: 300px; height: 300px'  
-        ondrop="divDrop(event)"
-        ondragover="divDragOver(event)"> basket</div>
+    <div id="red" draggable="true">1</div>
+    <div id="yellow" draggable="true">2</div>
+    <div id="green" draggable="true">3</div>
+    <div id="blue" draggable="true">4</div>
+
+    <div class="basket" id="droptarget">basket</div>
 
     <script>
-        let draggedBall = null;
 
-            function ballDragStart(eo) {
-                // началось перетаскивание мячика
-                eo = eo || window.event;
-                console.log('starting drag id=' + eo.target.id);
-                draggedBall = eo.target;
-            }
+        let draggedRed = null;
+        let draggedGreen = null;
 
-            function ballDragEnd(eo) {
-                // закончилось перетаскивание мячика (неважно куда он уронен)
-                eo = eo || window.event;
-                console.log('drag finished');
-                draggedBall = null;
-            }
+        const sourceRed = document.getElementById("red");
+        sourceRed.addEventListener("dragstart", (event) => {
+            draggedRed = event.target;
+        });
 
-            function divDragOver(eo) {
-                eo = eo || window.event;
-                // по-умолчанию ронять элементы в div запрещено, отменяем:
-                eo.preventDefault();
-            }
+        const sourceGreen = document.getElementById("green");
+        sourceGreen.addEventListener("dragstart", (event) => {
+            draggedGreen = event.target;
+        });
 
-            function divDrop(eo) {
-                // мячик уронен
-                eo = eo || window.event;
-                eo.preventDefault();
-                if (draggedBall)
-                    eo.currentTarget.appendChild(draggedBall);
-            }
+        const target = document.getElementById("droptarget");
+        target.addEventListener("dragover", (event) => {
+            event.preventDefault();
+        });
+
+        target.addEventListener("drop", (event) => {
+            event.preventDefault();
+            console.log('---red')
+        });
+        
     </script>
+
+    
+    
 </body>
 </html>
