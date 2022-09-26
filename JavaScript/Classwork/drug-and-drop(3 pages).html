@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #red{
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            margin: 30px;
+        }
+
+        #yellow{
+            width: 30px;
+            height: 30px;
+            background-color: yellow;
+            margin: 30px;
+        }
+
+        #green{
+            width: 30px;
+            height: 30px;
+            background-color: green;
+            margin: 30px;
+        }
+
+        #blue{
+            width: 30px;
+            height: 30px;
+            background-color: blue;
+            margin: 30px;
+        }
+
+        .basket{
+            width: 150px;
+            height: 150px;
+            background-color: gray;
+            margin-top: 150px;
+        }
+
+        .basket{
+            width: 150px;
+            height: 150px;
+            background-color: gray;
+            margin-top: 150px;
+        }
+    </style>
+</head>
+<body>
+
+<div id='app'></div>
+
+<script>
+
+  "use strict";
+
+  window.onhashchange=switchToStateFromURLHash;
+
+
+  function switchToStateFromURLHash() {
+    var URLHash=window.location.hash;
+
+
+    let pageHTML = '';
+    
+    switch ( URLHash ) {
+      case '#start-screen':
+        pageHTML+="<h3>Стартовый экран</h3>";
+        break;
+      case '#main':
+        pageHTML+="<div id='red' draggable='true'>1</div><div id='yellow' draggable='true'>2</div><div id='green' draggable='true'>3</div><div id='blue' draggable='true'>4</div>";
+        break;
+      case '#basket':
+        pageHTML+="<div class='basket' id='droptarget'>basket</div>";
+        break;
+      case '#about':
+        pageHTML+="<p>Привет меня зовут Жора</p><p>Мне 10 лет</p>";
+        break;
+    }
+    document.getElementById('app').innerHTML=pageHTML;
+
+  }
+
+  function switchToState(newState) {
+    location.hash=newState.pagename;
+  }
+
+  function switchToStartScreePage() {
+    switchToState( { pagename:'start-screen' } );
+  }
+
+  function switchToStartPage() {
+    switchToState( { pagename:'main' } );
+  }
+
+  function switchToSettingsPage() {
+    switchToState( { pagename:'basket' } );
+  }
+
+  function switchToGamePage() {
+    switchToState( { pagename:'about' } );
+  }
+
+  switchToStateFromURLHash();
+
+</script>
+
+<br>
+<input type=button value='Стартовый экран' onclick='switchToStartScreePage()'>
+<br>
+<input type=button value='main' onclick='switchToStartPage()'>
+<br>
+<input type=button value='basket' onclick='switchToSettingsPage()'>
+<br>
+<input type=button value='about' onclick='switchToGamePage()'>
+
+
+</body>
+</html>
