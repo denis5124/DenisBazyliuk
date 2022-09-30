@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeaBattle</title>
+    <style>
+
+        body {background-color: rgb(255, 204, 127);}
+
+        #board { position: relative; /* относительное позиционирование */
+            width: 1024px;
+            height: 863px;
+            margin: auto;
+            background: url(board.jpg) no-repeat; /* графика радарной сетки */
+        }
+
+        #messageArea { position: absolute;
+            top: 0px;
+            left: 0px;
+            color: rgb(175, 19, 149);
+            font-size: 2em;
+        }
+
+        table { position: absolute;
+            left: 83px;
+            top: 8px;
+            border-spacing: 0px;
+        }
+
+        td { width: 90px;
+            height: 90px;
+            border: solid gray 2px;
+            background-color: aqua;
+        }
+        
+        th { width: 90px;
+            height: 90px;
+            font-size: 3em;
+            background-color: antiquewhite;
+        }
+
+        form { position: absolute;
+            bottom: 0px;
+            right: 0px;
+            padding: 15px;
+            background-color: red;
+        }
+
+        input { background-color: white;
+            border-color: rgb(83, 175, 19);
+            font-size: 1em;
+        }
+
+        .hit { 
+            background: url("ship.png") no-repeat center center ;
+        }
+
+        .miss { 
+            background: url("miss.png") no-repeat center center ;
+        }
+
+    </style>
+</head>
+
+<body>
+    
+    <div id="board">
+
+        <div id="messageArea"></div> <!-- элемент для вывода сообщений -->
+
+        <table>
+            <tr>
+                <th></th><th>0</th><th>1</th><th>2</th><th>3</th>
+                <th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th>
+            </tr>
+            <tr>
+                <th>A</th>
+                <td id="00"></td><td id="01"></td><td id="02"></td><td id="03"></td><td id="04"></td>
+                <td id="05"></td><td id="06"></td><td id="07"></td><td id="08"></td><td id="09"></td>
+            </tr>
+            <tr>
+                <th>B</th>
+                <td id="10"></td><td id="11"></td><td id="12"></td><td id="13"></td><td id="14"></td>
+                <td id="15"></td><td id="16"></td><td id="17"></td><td id="18"></td><td id="19"></td>
+            </tr>
+            <tr>
+                <th>C</th>
+                <td id="20"></td><td id="21"></td><td id="22"></td><td id="23"></td><td id="24"></td>
+                <td id="25"></td><td id="26"></td><td id="27"></td><td id="28"></td><td id="29"></td>
+            </tr>
+            <tr>
+                <th>D</th>
+                <td id="30"></td><td id="31"></td><td id="32"></td><td id="33"></td><td id="34"></td>
+                <td id="35"></td><td id="36"></td><td id="37"></td><td id="38"></td><td id="39"></td>
+            </tr>
+            <tr>
+                <th>E</th>
+                <td id="40"></td><td id="41"></td><td id="42"></td><td id="43"></td><td id="44"></td>
+                <td id="45"></td><td id="46"></td><td id="47"></td><td id="48"></td><td id="49"></td>
+            </tr>
+            <tr>
+                <th>F</th>
+                <td id="50"></td><td id="51"></td><td id="52"></td><td id="53"></td><td id="54"></td>
+                <td id="55"></td><td id="56"></td><td id="57"></td><td id="58"></td><td id="59"></td>
+            </tr>
+            <tr>
+                <th>G</th>
+                <td id="60"></td><td id="61"></td><td id="62"></td><td id="63"></td><td id="64"></td>
+                <td id="65"></td><td id="66"></td><td id="67"></td><td id="68"></td><td id="69"></td>
+            </tr>
+            <tr>
+                <th>H</th>
+                <td id="70"></td><td id="71"></td><td id="72"></td><td id="73"></td><td id="74"></td>
+                <td id="75"></td><td id="76"></td><td id="77"></td><td id="78"></td><td id="79"></td>
+            </tr>
+            <tr>
+                <th>I</th>
+                <td id="80"></td><td id="81"></td><td id="82"></td><td id="83"></td><td id="84"></td>
+                <td id="85"></td><td id="86"></td><td id="87"></td><td id="88"></td><td id="89"></td>
+            </tr>
+            <tr>
+                <th>J</th>
+                <td id="90"></td><td id="91"></td><td id="92"></td><td id="93"></td><td id="94"></td>
+                <td id="95"></td><td id="96"></td><td id="97"></td><td id="98"></td><td id="99"></td>
+            </tr>
+            
+        </table>
+
+        <form action="">
+            <input type="text" id="guessInput" placeholder="A0">
+            <input type="button" id="fireButton" value="Fire!">
+        </form>
+
+    </div>
+
+    <script src="seaBattle3.js"></script> <!-- файл с кодом JS -->
+
+</body>
+</html>
