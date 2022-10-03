@@ -299,7 +299,7 @@ const controller1 = {
     guesses: 0, // объявляется свойство "попытки", которое инициализируется нулем
 
     processGuess1: function (guess) { // обработка координат выстрела и передача их модели
-        let location = parseGuess1(guess); // если не получен null значит координаты введены верно
+        let location = guess;
         if (location) {
             this.guesses++; // увеличение счётчика числа выстрелов на 1
             let hit = model1.fire(location); // при попадании переменная hit получает true от метода fire
@@ -327,30 +327,6 @@ const controller2 = {
     }
 }
 
-function parseGuess1(guess) { // функция получения координат
-    const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]; // массив с буквами, которые могут присутствовать в координатах
-
-    if (guess === null || guess.length !== 2) { // проверка на null и что в строке 2 символа
-        alert("Oops, please enter a letter and a number on the board.");
-    }
-    else {
-        firstChar = guess.charAt(0); // извлекает первый символ строки
-        let row = alphabet.indexOf(firstChar); // получаем цифру от 0 до 6, соотвествующую букве
-        let column = guess.charAt(1); // добавляется код для получения второго символа, представлящего столбец игрового поля
-        if (isNaN(row) || isNaN(column)) { // проверка явлются ли цифрами строки и столбцы
-            alert("Oops, that isn't on the board.");
-        }
-        // проверка влазят ли полученные цифры в диапазон игрового поля (см. объект модели)
-        else if (row < 0 || row >= model1.boardSize || column < 0 || column >= model1.boardSize) {
-            alert("Oops, that's off the board!");
-        }
-        else {
-            return row + column;
-        }
-    }
-    return null; // проверки не пройдены, возвращается null
-}
-
 function parseGuess2(guess) { // функция получения координат
     const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]; // массив с буквами, которые могут присутствовать в координатах
 
@@ -375,18 +351,19 @@ function parseGuess2(guess) { // функция получения коорди�
     return null; // проверки не пройдены, возвращается null
 }
 
+let guessArr = ["0"];
 function handleFireButton1() {
-    const guessInput1 = document.getElementById("guessInput1");
-    let guess = guessInput1.value; // извлечение введённых координат
-    controller1.processGuess1(guess); // передача введённых координат контроллеру
-    guessInput1.value = ""; // команда удаляет содержимое input формы
-}
-
-function handleKeyPress1(e) { // обработчик нажатий клавиш; // (e)-какая клавиша была нажата
-    const fireButton1 = document.getElementById("fireButton1"); // получение ссылки на кнопку Fire
-    if (e.keyCode === 13) { // нажатие Enter = 13
-        fireButton1.onclick(); // вызывается функция и кнопка Fire! работает как-будто по ней нажали
-        return false;
+    let row = String(Math.floor(Math.random() * model1.boardSize));
+    let column = String(Math.floor(Math.random() * model1.boardSize));
+    let guess = row + column; // извлечение введённых координат
+    for (i = 0; i < guessArr.length-1; i++) {
+        if (guessArr[i] === guess) {
+            handleFireButton1();
+        } else {
+            guessArr.push('guess'),
+            console.log(guessArr),
+            controller1.processGuess1(guess); // передача введённых координат
+        }
     }
 }
 
@@ -410,8 +387,6 @@ window.onload = init; // передача введённых координат 
 function init() {
     let fireButton1 = document.getElementById("fireButton1"); // получение ссылки на кнопку Fire
     fireButton1.onclick = handleFireButton1; // назначается обработчик события - функция handleFireButton
-    let guessInput1 = document.getElementById("guessInput1"); // получение ссылки на поле ввода координат
-    guessInput1.onkeydown = handleKeyPress1; // назначается обработчик события - функция handleKeyPress
     let fireButton2 = document.getElementById("fireButton2"); // получение ссылки на кнопку Fire
     fireButton2.onclick = handleFireButton2; // назначается обработчик события - функция handleFireButton
     let guessInput2 = document.getElementById("guessInput2"); // получение ссылки на поле ввода координат

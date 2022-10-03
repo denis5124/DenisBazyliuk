@@ -1,10 +1,10 @@
-    // объект представления
+// объект представления
 const view = {
-        // включает три метода
+    // включает три метода
     displayMessage: function (msg) {
-            // получаем элемент с помощью ID
+        // получаем элемент с помощью ID
         const messageArea = document.getElementById("messageArea");
-            // задаём текст при помощи свойства
+        // задаём текст при помощи свойства
         messageArea.innerHTML = msg;
     },
     displayHit: function (location) {
@@ -17,30 +17,67 @@ const view = {
     },
 };
 
-    // объект модели
+// объект модели
 const model = {
-        // свойства модели
-    boardSize: 7, // размер игрового поля
-    numShips: 3,
-    shipLength: 3,
+    // свойства модели
+    boardSize: 10, // размер игрового поля
+    numShips: 10,
     shipsSunk: 0, // кол-во потопленных
     ships: [
-        { locations: ["0", "0", "0"], hits: ["", "", "",] },
-        { locations: ["0", "0", "0"], hits: ["", "", "",] },
-        { locations: ["0", "0", "0"], hits: ["", "", "",] }
-        ], 
+        { locations: ["0"], hits: [""] },
+        { locations: ["0"], hits: ["", ""] },
+        { locations: ["0"], hits: ["", ""] },
+        { locations: ["0"], hits: ["", ""] },
+        { locations: ["0"], hits: ["", ""] },
+        { locations: ["0"], hits: ["", ""] },
+        { locations: ["0"], hits: ["", ""] },
+        { locations: ["0"], hits: ["", ""] },
+        { locations: ["0"], hits: ["", ""] },
+        { locations: ["0"], hits: ["", ""] },
+    ],
 
-    generateShipLocations: function () { // метод создаёт корабли, пока массив model.ships не будет заполнен
+    generateShipLocations4: function () { // метод создаёт корабли, пока массив model.ships не будет заполнен
         let locations;
-        for (let i = 0; i < this.numShips; i++) { // для каждого корабля генерируем набор позиций
+        for (let i = 0; i < 1; i++) { // для каждого корабля генерируем набор позиций
             do { // цикл do while
-                locations = this.generateShip(); // генерируется новый набор позиций
+                locations = this.generateShip(4); // генерируется новый набор позиций
             } while (this.collision(locations)); // проверяется, нет ли перекрытий. Если есть перекрытия - ещё одна попытка
             this.ships[i].locations = locations; // полученные позиции без перекрытия сохраняются в свойстве model.ships.locations
         }
     },
 
-    generateShip: function () { // метод создаёт массив со случайными позициями кораблей, не проверяя возможные перекрытия
+    generateShipLocations3: function () { // метод создаёт корабли, пока массив model.ships не будет заполнен
+        let locations;
+        for (let i = 1; i < 3; i++) { // для каждого корабля генерируем набор позиций
+            do { // цикл do while
+                locations = this.generateShip(3); // генерируется новый набор позиций
+            } while (this.collision(locations)); // проверяется, нет ли перекрытий. Если есть перекрытия - ещё одна попытка
+            this.ships[i].locations = locations; // полученные позиции без перекрытия сохраняются в свойстве model.ships.locations
+        }
+    },
+
+    generateShipLocations2: function () { // метод создаёт корабли, пока массив model.ships не будет заполнен
+        let locations;
+        for (let i = 3; i < 6; i++) { // для каждого корабля генерируем набор позиций
+            do { // цикл do while
+                locations = this.generateShip(2); // генерируется новый набор позиций
+            } while (this.collision(locations)); // проверяется, нет ли перекрытий. Если есть перекрытия - ещё одна попытка
+            this.ships[i].locations = locations; // полученные позиции без перекрытия сохраняются в свойстве model.ships.locations
+        }
+    },
+
+    generateShipLocations1: function () { // метод создаёт корабли, пока массив model.ships не будет заполнен
+        let locations;
+        for (let i = 6; i < 10; i++) { // для каждого корабля генерируем набор позиций
+            do { // цикл do while
+                locations = this.generateShip(1); // генерируется новый набор позиций
+            } while (this.collision(locations)); // проверяется, нет ли перекрытий. Если есть перекрытия - ещё одна попытка
+            this.ships[i].locations = locations; // полученные позиции без перекрытия сохраняются в свойстве model.ships.locations
+        }
+    },
+
+    generateShip: function (length) { // метод создаёт массив со случайными позициями кораблей, не проверяя возможные перекрытия
+        this.shipLength = length;
         let direction = Math.floor(Math.random() * 2); // генерируется число от 0 до 1 и умножается на 2; затем преобразуется в 0 или 1
         let row, col;
         if (direction === 1) { // создаётся горизонтальный корабль
@@ -55,7 +92,7 @@ const model = {
         for (let i = 0; i < this.shipLength; i++) { // в цикле до количества позиций в корабле
             if (direction === 1) {
                 newShipLocations.push(row + "" + (col + i)); // новая позиция заносится в массив newShipLocations:
-                    // где данные состоят из строки и столбца + i. При первой итерации i=0 и сумма означает начальный столбец
+                // где данные состоят из строки и столбца + i. При первой итерации i=0 и сумма означает начальный столбец
             } else {
                 newShipLocations.push((row + i) + "" + col); // то же для вертикального
             }
@@ -68,7 +105,7 @@ const model = {
         for (let i = 0; i < this.numShips; i++) {
             let ship = model.ships[i]; // для каждого корабля уже находящегося на поле
             for (var j = 0; j < locations.length; j++) { // проверяем встречаются ли какая-либо из позиций массива locations нового корабля
-                                                        // в массиве locations существующих кораблей
+                // в массиве locations существующих кораблей
                 if (ship.locations.indexOf(locations[j]) >= 0) { // indexOf проверяет присутствует ли заданная позиция в массиве
                     return true; // возврат из цикла, функция немедленно завершается и возврщает true
                 }
@@ -87,7 +124,7 @@ const model = {
                 ship.hits[index] = "hit";
                 view.displayHit(guess); // оповещаем предствление о том, что в клетке guess следует вывести маркер попадания
                 view.displayMessage("HIT!"); // приказываем предствлению вывести сообщение HIT
-                    // проверка не потоплен ли корабль
+                // проверка не потоплен ли корабль
                 if (this.isSunk(ship)) {
                     view.displayMessage("You sank my battleship"); // сообщаем игроку, что он потопил корабль
                     this.shipsSunk++;
@@ -119,8 +156,8 @@ const controller = {
         if (location) {
             this.guesses++; // увеличение счётчика числа выстрелов на 1
             let hit = model.fire(location); // при попадании переменная hit получает true от метода fire
-                // если попадание и при этом кол-во потопленных равно кол-ву учавствовавших - сообщение
-            if (hit && model.shipsSunk === model.numShips) { 
+            // если попадание и при этом кол-во потопленных равно кол-ву учавствовавших - сообщение
+            if (hit && model.shipsSunk === model.numShips) {
                 view.displayMessage("You sank all my battleships, in " + this.guesses + " guesses");
             }
         }
@@ -128,7 +165,7 @@ const controller = {
 }
 
 function parseGuess(guess) { // функция получения координат
-    const alphabet = ["A", "B", "C", "D", "E", "F", "G"]; // массив с буквами, которые могут присутствовать в координатах
+    const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]; // массив с буквами, которые могут присутствовать в координатах
 
     if (guess === null || guess.length !== 2) { // проверка на null и что в строке 2 символа
         alert("Oops, please enter a letter and a number on the board.");
@@ -173,7 +210,10 @@ function init() {
     fireButton.onclick = handleFireButton; // назначается обработчик события - функция handleFireButton
     let guessInput = document.getElementById("guessInput"); // получение ссылки на поле ввода координат
     guessInput.onkeydown = handleKeyPress; // назначается обработчик события - функция handleKeyPress
-    model.generateShipLocations(); // вызов метода, генерирующего позиции кораблей, кот. заполнит пустые массивы в объекте модели
-            // вызывается из функции init, чобы это проиходило во время загрузки игры (до её начала).
-            // Позиции всех кораблей будут определены к моменту начала
+    model.generateShipLocations4(); // вызов метода, генерирующего позиции кораблей, кот. заполнит пустые массивы в объекте модели
+    // вызывается из функции init, чобы это проиходило во время загрузки игры (до её начала).
+    // Позиции всех кораблей будут определены к моменту начала
+    model.generateShipLocations3();
+    model.generateShipLocations2();
+    model.generateShipLocations1();
 }
