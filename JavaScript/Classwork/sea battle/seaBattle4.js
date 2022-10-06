@@ -122,7 +122,7 @@ const model1 = {
     collision: function (locations) { // проверка на отсутствие перекрытий
         for (let i = 0; i < this.numShips; i++) {
             let ship = model1.ships[i]; // для каждого корабля уже находящегося на поле
-            for (var j = 0; j < locations.length; j++) { // проверяем встречаются ли какая-либо из позиций массива locations нового корабля
+            for (let j = 0; j < locations.length; j++) { // проверяем встречаются ли какая-либо из позиций массива locations нового корабля
                 // в массиве locations существующих кораблей
                 if (ship.locations.indexOf(locations[j]) >= 0) { // indexOf проверяет присутствует ли заданная позиция в массиве
                     return true; // возврат из цикла, функция немедленно завершается и возврщает true
@@ -249,11 +249,25 @@ const model2 = {
 
     // locations - массив позиций нового корабля, который надо разместить на игровом поле
     collision: function (locations) { // проверка на отсутствие перекрытий
+        let locationsBorder = [];
+        for (let l = 0; l < locations.length; l++) {
+            locationsBorder.push(
+                Number(locations[l].charAt(0)) + '' + Number(locations[l].charAt(1)),
+                (Number(locations[l].charAt(0)) + 1) + '' + Number(locations[l].charAt(1)),
+                (Number(locations[l].charAt(0)) + 1) + '' + (Number(locations[l].charAt(1)) + 1),
+                (Number(locations[l].charAt(0)) + 1) + '' + (Number(locations[l].charAt(1)) - 1),
+                (Number(locations[l].charAt(0)) - 1) + '' + Number(locations[l].charAt(1)),
+                (Number(locations[l].charAt(0)) - 1) + '' + (Number(locations[l].charAt(1)) + 1),
+                (Number(locations[l].charAt(0)) - 1) + '' + (Number(locations[l].charAt(1)) - 1),
+                Number(locations[l].charAt(0)) + '' + (Number(locations[l].charAt(1)) + 1),
+                Number(locations[l].charAt(0)) + '' + (Number(locations[l].charAt(1)) - 1)
+            )
+        }
         for (let i = 0; i < this.numShips; i++) {
             let ship = model2.ships[i]; // для каждого корабля уже находящегося на поле
-            for (var j = 0; j < locations.length; j++) { // проверяем встречаются ли какая-либо из позиций массива locations нового корабля
+            for (let j = 0; j < locationsBorder.length; j++) { // проверяем встречаются ли какая-либо из позиций массива locations нового корабля
                 // в массиве locations существующих кораблей
-                if (ship.locations.indexOf(locations[j]) >= 0) { // indexOf проверяет присутствует ли заданная позиция в массиве
+                if (ship.locations.indexOf(locationsBorder[j]) >= 0) { // indexOf проверяет присутствует ли заданная позиция в массиве
                     return true; // возврат из цикла, функция немедленно завершается и возврщает true
                 }
             }
@@ -351,20 +365,17 @@ function parseGuess2(guess) { // функция получения коорди�
     return null; // проверки не пройдены, возвращается null
 }
 
-let guessArr = ["0"];
+let guessArr = [];
 function handleFireButton1() {
     let row = String(Math.floor(Math.random() * model1.boardSize));
     let column = String(Math.floor(Math.random() * model1.boardSize));
     let guess = row + column; // извлечение введённых координат
-    for (i = 0; i < guessArr.length-1; i++) {
-        if (guessArr[i] === guess) {
+        if (guessArr.indexOf(guess) >=1) {
             handleFireButton1();
         } else {
-            guessArr.push('guess'),
-            console.log(guessArr),
+            guessArr.push(guess),
             controller1.processGuess1(guess); // передача введённых координат
         }
-    }
 }
 
 function handleFireButton2() {
