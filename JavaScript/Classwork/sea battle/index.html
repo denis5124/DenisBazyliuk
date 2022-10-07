@@ -45,7 +45,7 @@
       return ` 
         <h2>Sea Battle !!!</h2>
         <h3>Присоединяйся к сражениям в морях и океанах!</h3>
-        <input type="button" class="waves-effect waves-light btn-large" value="Играть самому" onclick="switchToSelf()">
+        <input type="button" class="waves-effect waves-light btn-large" value="Играть самому" onclick="switchToSelf('1.js')">
         <input type="button" class="waves-effect waves-light btn-large" value="Играть против компьютера" onclick="switchToComp()">
         <input type="button" class="waves-effect waves-light btn-large" value="Играть с соперником" onclick="switchToOpponent()">
         <br>
@@ -147,8 +147,11 @@
       switchToState({ pagename: 'start-screen' });
     }
 
-    function switchToSelf() {
+    function switchToSelf(url) {
       switchToState({ pagename: 'self-game' });
+      const s=document.createElement("script");
+        s.src=url;
+        document.getElementsByTagName("head")[0].appendChild(s);
     }
 
     function switchToComp() {
