@@ -1,4 +1,4 @@
-// объект представления
+console.log('aaa');
 const view1 = {
     // включает три метода
     displayMessage: function (msg) {
@@ -26,11 +26,11 @@ const view2 = {
         messageArea.innerHTML = msg;
     },
     displayHit: function (location) {
-        const cell = document.getElementById(2+location);
+        const cell = document.getElementById(2 + location);
         cell.setAttribute("class", "hit");
     },
     displayMiss: function (location) {
-        const cell = document.getElementById(2+location);
+        const cell = document.getElementById(2 + location);
         cell.setAttribute("class", "miss");
     },
 };
@@ -433,9 +433,7 @@ function handleKeyPress2(e) { // обработчик нажатий клави�
     }
 }
 
-window.onload = init; // передача введённых координат контроллеру
 
-function init() {
     let fireButton1 = document.getElementById("fireButton1"); // получение ссылки на кнопку Fire
     fireButton1.onclick = handleFireButton1; // назначается обработчик события - функция handleFireButton
     let guessInput1 = document.getElementById("guessInput1"); // получение ссылки на поле ввода координат
@@ -454,4 +452,4 @@ function init() {
     model2.generateShipLocations3();
     model2.generateShipLocations2();
     model2.generateShipLocations1();
-}
+

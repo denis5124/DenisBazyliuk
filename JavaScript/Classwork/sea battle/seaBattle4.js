@@ -120,11 +120,25 @@ const model1 = {
 
     // locations - массив позиций нового корабля, который надо разместить на игровом поле
     collision: function (locations) { // проверка на отсутствие перекрытий
+        let locationsBorder = [];
+        for (let l = 0; l < locations.length; l++) {
+            locationsBorder.push(
+                Number(locations[l].charAt(0)) + '' + Number(locations[l].charAt(1)),
+                (Number(locations[l].charAt(0)) + 1) + '' + Number(locations[l].charAt(1)),
+                (Number(locations[l].charAt(0)) + 1) + '' + (Number(locations[l].charAt(1)) + 1),
+                (Number(locations[l].charAt(0)) + 1) + '' + (Number(locations[l].charAt(1)) - 1),
+                (Number(locations[l].charAt(0)) - 1) + '' + Number(locations[l].charAt(1)),
+                (Number(locations[l].charAt(0)) - 1) + '' + (Number(locations[l].charAt(1)) + 1),
+                (Number(locations[l].charAt(0)) - 1) + '' + (Number(locations[l].charAt(1)) - 1),
+                Number(locations[l].charAt(0)) + '' + (Number(locations[l].charAt(1)) + 1),
+                Number(locations[l].charAt(0)) + '' + (Number(locations[l].charAt(1)) - 1)
+            )
+        }
         for (let i = 0; i < this.numShips; i++) {
             let ship = model1.ships[i]; // для каждого корабля уже находящегося на поле
-            for (let j = 0; j < locations.length; j++) { // проверяем встречаются ли какая-либо из позиций массива locations нового корабля
+            for (let j = 0; j < locationsBorder.length; j++) { // проверяем встречаются ли какая-либо из позиций массива locations нового корабля
                 // в массиве locations существующих кораблей
-                if (ship.locations.indexOf(locations[j]) >= 0) { // indexOf проверяет присутствует ли заданная позиция в массиве
+                if (ship.locations.indexOf(locationsBorder[j]) >= 0) { // indexOf проверяет присутствует ли заданная позиция в массиве
                     return true; // возврат из цикла, функция немедленно завершается и возврщает true
                 }
             }

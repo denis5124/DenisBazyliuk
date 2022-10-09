@@ -67,3 +67,109 @@ body {
 .game-setting:last-child {
     border-bottom: none;
 }
+
+#board {
+    position: relative;
+    width: 1200px;
+    height: 973px;
+    margin: auto;
+}
+
+#messageArea {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    color: rgb(175, 19, 149);
+    font-size: 2em;
+}
+
+#table {
+    position: absolute;
+    left: 83px;
+    top: 100px;
+    border-spacing: 0px;
+}
+
+td {
+    width: 45px;
+    height: 45px;
+    border: solid gray 1px;
+    background-color: rgb(47, 100, 100);
+}
+
+th {
+    width: 45px;
+    height: 45px;
+    font-size: 1.5em;
+    background-color: antiquewhite;
+}
+
+form {
+    position: absolute;
+    bottom: 140px;
+    left: 83px;
+    padding: 15px;
+    background-color: red;
+}
+
+input {
+    background-color: white;
+    border-color: rgb(83, 175, 19);
+    font-size: 1em;
+}
+
+.hit {
+    background: url("../img/ship_big.png") no-repeat center center;
+}
+
+.miss {
+    background: url("../img/miss2.png") no-repeat center center;
+}
+
+#messageArea1 {
+    float: left;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    color: rgb(175, 19, 149);
+    font-size: 2em;
+}
+
+#messageArea2 {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    color: rgb(175, 19, 149);
+    font-size: 2em;
+}
+
+#table1 {
+    float: left;
+    position: absolute;
+    left: 20px;
+    top: 100px;
+    border-spacing: 0px;
+}
+
+#table2 {
+    position: absolute;
+    right: 20px;
+    top: 100px;
+    border-spacing: 0px;
+}
+
+ #form1 {
+    position: absolute;
+    bottom: 140px;
+    left: 83px;
+    padding: 15px;
+    background-color: red;
+ }
+
+ #form2 {
+    position: absolute;
+    bottom: 140px;
+    left: 703px;
+    padding: 15px;
+    background-color: red;
+ }

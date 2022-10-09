@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label><input type="checkbox" id="miaow">Мяуу!</label>
+
+    <script>
+
+        var miaow = document.getElementById('miaow');
+
+        var audio = new Audio();
+        audio.src = "sea battle/sound/fone.mp3";
+        audio.load();
+        audio.loop = true;
+
+        miaow.addEventListener('change', function (event) {
+            if (event.target.checked) {
+                audio.play();
+            }
+            else{
+                audio.pause();
+                audio.currentTime=0;
+            }
+        }, false);
+
+    </script>
+</body>
+
+</html>

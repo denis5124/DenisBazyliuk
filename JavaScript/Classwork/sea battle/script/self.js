@@ -1,4 +1,4 @@
-
+console.log('aa')
 const view = {
     // включает три метода
     displayMessage: function (msg) {
@@ -10,6 +10,10 @@ const view = {
     displayHit: function (location) {
         const cell = document.getElementById(location);
         cell.setAttribute("class", "hit");
+        let audio = new Audio();
+        audio.src = "sound/hit.mp3";
+        audio.load();
+        audio.play();
     },
     displayMiss: function (location) {
         const cell = document.getElementById(location);
@@ -24,18 +28,18 @@ const model = {
     numShips: 10,
     shipsSunk: 0, // кол-во потопленных
     ships: [
+        { locations: ["0"], hits: ["", "", "", ""] },
+        { locations: ["0"], hits: ["", "", ""] },
+        { locations: ["0"], hits: ["", "", ""] },
+        { locations: ["0"], hits: ["", ""] },
+        { locations: ["0"], hits: ["", ""] },
+        { locations: ["0"], hits: ["", ""] },
         { locations: ["0"], hits: [""] },
-        { locations: ["0"], hits: ["", ""] },
-        { locations: ["0"], hits: ["", ""] },
-        { locations: ["0"], hits: ["", ""] },
-        { locations: ["0"], hits: ["", ""] },
-        { locations: ["0"], hits: ["", ""] },
-        { locations: ["0"], hits: ["", ""] },
-        { locations: ["0"], hits: ["", ""] },
-        { locations: ["0"], hits: ["", ""] },
-        { locations: ["0"], hits: ["", ""] },
+        { locations: ["0"], hits: [""] },
+        { locations: ["0"], hits: [""] },
+        { locations: ["0"], hits: [""] },
     ],
-   
+
     generateShipLocations4: function () { // метод создаёт корабли, пока массив model.ships не будет заполнен
         let locations;
         for (let i = 0; i < 1; i++) { // для каждого корабля генерируем набор позиций
@@ -117,7 +121,7 @@ const model = {
             )
         }
         for (let i = 0; i < this.numShips; i++) {
-            let ship = model2.ships[i]; // для каждого корабля уже находящегося на поле
+            let ship = model.ships[i]; // для каждого корабля уже находящегося на поле
             for (let j = 0; j < locationsBorder.length; j++) { // проверяем встречаются ли какая-либо из позиций массива locations нового корабля
                 // в массиве locations существующих кораблей
                 if (ship.locations.indexOf(locationsBorder[j]) >= 0) { // indexOf проверяет присутствует ли заданная позиция в массиве
@@ -137,7 +141,7 @@ const model = {
             if (index >= 0) { // есть попадание
                 ship.hits[index] = "hit";
                 view.displayHit(guess); // оповещаем предствление о том, что в клетке guess следует вывести маркер попадания
-                view.displayMessage("HIT!"); // приказываем предствлению вывести сообщение HIT
+                view.displayMessage("HIT!");// приказываем предствлению вывести сообщение HIT
                 // проверка не потоплен ли корабль
                 if (this.isSunk(ship)) {
                     view.displayMessage("You sank my battleship"); // сообщаем игроку, что он потопил корабль
@@ -152,7 +156,7 @@ const model = {
     },
 
     isSunk: function (ship) { // метод проверяет потоплен ли корабль
-        for (let i = 0; i < this.shipLength; i++) {
+        for (let i = 0; i < ship.locations.length; i++) {
             if (ship.hits[i] !== "hit") {
                 return false;
             }
@@ -173,6 +177,11 @@ const controller = {
             // если попадание и при этом кол-во потопленных равно кол-ву учавствовавших - сообщение
             if (hit && model.shipsSunk === model.numShips) {
                 view.displayMessage("You sank all my battleships, in " + this.guesses + " guesses");
+                result(this.guesses);
+                let audio = new Audio();
+                audio.src = "sound/win.mp3";
+                audio.load();
+                audio.play();
             }
         }
     }
@@ -216,14 +225,14 @@ function handleKeyPress(e) { // обработчик нажатий клавиш
         return false;
     }
 }
-    
-    let fireButton = document.getElementById("fireButton"); // получение ссылки на кнопку Fire
-    fireButton.onclick = handleFireButton; // назначается обработчик события - функция handleFireButton
-    let guessInput = document.getElementById("guessInput"); // получение ссылки на поле ввода координат
-    guessInput.onkeydown = handleKeyPress; // назначается обработчик события - функция handleKeyPress
-    model.generateShipLocations4(); // вызов метода, генерирующего позиции кораблей, кот. заполнит пустые массивы в объекте модели
-    // вызывается из функции init, чобы это проиходило во время загрузки игры (до её начала).
-    // Позиции всех кораблей будут определены к моменту начала
-    model.generateShipLocations3();
-    model.generateShipLocations2();
-    model.generateShipLocations1();
+
+let fireButton = document.getElementById("fireButton"); // получение ссылки на кнопку Fire
+fireButton.onclick = handleFireButton; // назначается обработчик события - функция handleFireButton
+let guessInput = document.getElementById("guessInput"); // получение ссылки на поле ввода координат
+guessInput.onkeydown = handleKeyPress; // назначается обработчик события - функция handleKeyPress
+model.generateShipLocations4(); // вызов метода, генерирующего позиции кораблей, кот. заполнит пустые массивы в объекте модели
+// вызывается из функции init, чобы это проиходило во время загрузки игры (до её начала).
+// Позиции всех кораблей будут определены к моменту начала
+model.generateShipLocations3();
+model.generateShipLocations2();
+model.generateShipLocations1();
