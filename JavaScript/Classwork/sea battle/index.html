@@ -31,7 +31,7 @@
       return ` 
         <h2>Sea Battle !!!</h2>
         <h3>Присоединяйся к сражениям в морях и океанах!</h3>
-        <input type="button" class="waves-effect" value="Играть самому" onclick="switchToSelf('script/selfLS.js')">
+        <input type="button" class="waves-effect" value="Играть самому" onclick="switchToSelf('script/self.js')">
         <input type="button" class="waves-effect" value="Играть против компьютера" onclick="switchToComp('script/comp.js')">
         <input type="button" class="waves-effect" value="Играть с соперником" onclick="switchToOpponent('script/opponent.js')">
         <br>
@@ -895,22 +895,60 @@
 
     switchToStateFromURLHash();
 
+    let foneSound = document.getElementById('foneSound');
+        let audioFone = new Audio();
+        audioFone.src = 'sound/fone.mp3';
+        audioFone.load();
+        foneSound.addEventListener('change', function (event) {
+            if (event.target.checked) {
+                audioFone.play();
+                audioFone.loop = true;
+            } else {
+                audioFone.pause();
+            }
+        }, false);
+
+        let hitSound = document.getElementById('hitSound');
+        function hit() {
+            let audioHit = new Audio();
+            audioHit.src = 'sound/hit.mp3';
+            audioHit.load();
+            if (hitSound.checked) {
+                audioHit.play();
+            } else {
+                audioHit.pause();
+            } false;
+        };
+
+        let winSound = document.getElementById('winSound');
+        function win() {
+            let audioWin = new Audio();
+            audioWin.src = 'sound/win.mp3';
+            audioWin.load();
+            if (winSound.checked) {
+                audioWin.play();
+            } else {
+                audioWin.pause();
+            } false;
+        };
+
+
 
         function result(name, guesses) {
             let array;
             if (localStorage.result === undefined) {
-                array = [['',101], ['', 101]]
+                array = [['',101], ['', 101], ['', 101], ['', 101], ['', 101]]
             }else{
                 array = JSON.parse(localStorage.result)
             }
             for (let i = 0; i < array.length; i++) {
-                if (guesses < array[i[1]]) {
+                if (guesses < array[i][1]) {
                     array.splice(i, 0, [name,guesses]);
                     break;
                 }
             }
-            if (array.length > 2) {
-                array.splice(2, 1);
+            if (array.length > 5) {
+                array.splice(5, 1);
             }
             console.log(array);
             localStorage.result = JSON.stringify(array);

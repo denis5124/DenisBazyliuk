@@ -1,4 +1,4 @@
-let name = prompt('игрок1, введите Ваше имя');
+
 const view = {
     // включает три метода
     displayMessage: function (msg) {
@@ -10,11 +10,9 @@ const view = {
     displayHit: function (location) {
         const cell = document.getElementById(location);
         cell.setAttribute("class", "hit");
-        let audio = new Audio();
-        audio.src = "sound/hit.mp3";
-        audio.load();
-        audio.play();
+        hit();
     },
+
     displayMiss: function (location) {
         const cell = document.getElementById(location);
         cell.setAttribute("class", "miss");
@@ -105,14 +103,14 @@ const model = {
                 view.displayMessage("HIT!");// приказываем предствлению вывести сообщение HIT
                 // проверка не потоплен ли корабль
                 if (this.isSunk(ship)) {
-                    view.displayMessage(`$(name), You sank my battleship`); // сообщаем игроку, что он потопил корабль
+                    view.displayMessage(`${name1}, you sank my battleship`); // сообщаем игроку, что он потопил корабль
                     this.shipsSunk++;
                 }
                 return true;
             }
         }
         view.displayMiss(guess); // сообщаем представлению, что в клетке следует вывести маркер промаха
-        view.displayMessage("You missed."); // приказываем представлению, вывести сообщение о промахе
+        view.displayMessage(`${name1}, you missed.`); // приказываем представлению, вывести сообщение о промахe
         return false;
     },
 
@@ -125,7 +123,7 @@ const model = {
         return true;
     }
 }
-
+let name1 = prompt('игрок, введите Ваше имя');
 // объект контроллер
 const controller = {
     guesses: 0, // объявляется свойство "попытки", которое инициализируется нулем
@@ -137,12 +135,10 @@ const controller = {
             let hit = model.fire(location); // при попадании переменная hit получает true от метода fire
             // если попадание и при этом кол-во потопленных равно кол-ву учавствовавших - сообщение
             if (hit && model.shipsSunk === model.numShips) {
-                view.displayMessage("You sank all my battleships, in " + this.guesses + " guesses");
-                let audio = new Audio();
-                audio.src = "sound/win.mp3";
-                audio.load();
-                audio.play();
-                result(this.guesses);
+                view.displayMessage(`${name1}, you sank all my battleships, in ${this.guesses} guesses`);
+                win();
+                result(name1, this.guesses);
+                switchToStartScreePage();
             }
         }
     }
@@ -191,6 +187,15 @@ let fireButton = document.getElementById("fireButton"); // получение с
 fireButton.onclick = handleFireButton; // назначается обработчик события - функция handleFireButton
 let guessInput = document.getElementById("guessInput"); // получение ссылки на поле ввода координат
 guessInput.onkeydown = handleKeyPress; // назначается обработчик события - функция handleKeyPress
+
 model.generateShipLocations4(); // вызов метода, генерирующего позиции кораблей, кот. заполнит пустые массивы в объекте модели
-// вызывается из функции init, чобы это проиходило во время загрузки игры (до её начала).
-// Позиции всех кораблей будут определены к моменту начала
+
+let mouseFire = document.getElementById('table');
+mouseFire.onclick = function (e) {
+    const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+    let row = alphabet[e.target.id.charAt(0)];
+    let column = e.target.id.charAt(1);
+    let guess = row + column;
+    controller.processGuess(guess);
+}
+

@@ -1,4 +1,4 @@
-console.log('aa')
+
 const view = {
     // включает три метода
     displayMessage: function (msg) {
@@ -10,10 +10,7 @@ const view = {
     displayHit: function (location) {
         const cell = document.getElementById(location);
         cell.setAttribute("class", "hit");
-        let audio = new Audio();
-        audio.src = "sound/hit.mp3";
-        audio.load();
-        audio.play();
+        hit();
     },
     displayMiss: function (location) {
         const cell = document.getElementById(location);
@@ -28,12 +25,12 @@ const model = {
     numShips: 10,
     shipsSunk: 0, // кол-во потопленных
     ships: [
-        { locations: ["0"], hits: ["", "", "", ""] },
-        { locations: ["0"], hits: ["", "", ""] },
-        { locations: ["0"], hits: ["", "", ""] },
-        { locations: ["0"], hits: ["", ""] },
-        { locations: ["0"], hits: ["", ""] },
-        { locations: ["0"], hits: ["", ""] },
+        { locations: ["0"], hits: [""] },
+        { locations: ["0"], hits: [""] },
+        { locations: ["0"], hits: [""] },
+        { locations: ["0"], hits: [""] },
+        { locations: ["0"], hits: [""] },
+        { locations: ["0"], hits: [""] },
         { locations: ["0"], hits: [""] },
         { locations: ["0"], hits: [""] },
         { locations: ["0"], hits: [""] },
@@ -141,17 +138,17 @@ const model = {
             if (index >= 0) { // есть попадание
                 ship.hits[index] = "hit";
                 view.displayHit(guess); // оповещаем предствление о том, что в клетке guess следует вывести маркер попадания
-                view.displayMessage("HIT!");// приказываем предствлению вывести сообщение HIT
+                view.displayMessage("попал!");// приказываем предствлению вывести сообщение HIT
                 // проверка не потоплен ли корабль
                 if (this.isSunk(ship)) {
-                    view.displayMessage("You sank my battleship"); // сообщаем игроку, что он потопил корабль
+                    view.displayMessage(`${name1}, Вы потопили корабль`); // сообщаем игроку, что он потопил корабль
                     this.shipsSunk++;
                 }
                 return true;
             }
         }
         view.displayMiss(guess); // сообщаем представлению, что в клетке следует вывести маркер промаха
-        view.displayMessage("You missed."); // приказываем представлению, вывести сообщение о промахе
+        view.displayMessage(`${name1}, промах`); // приказываем представлению, вывести сообщение о промахе
         return false;
     },
 
@@ -164,7 +161,7 @@ const model = {
         return true;
     }
 }
-
+let name1 = prompt('игрок, введите Ваше имя');
 // объект контроллер
 const controller = {
     guesses: 0, // объявляется свойство "попытки", которое инициализируется нулем
@@ -176,12 +173,10 @@ const controller = {
             let hit = model.fire(location); // при попадании переменная hit получает true от метода fire
             // если попадание и при этом кол-во потопленных равно кол-ву учавствовавших - сообщение
             if (hit && model.shipsSunk === model.numShips) {
-                view.displayMessage("You sank all my battleships, in " + this.guesses + " guesses");
-                result(this.guesses);
-                let audio = new Audio();
-                audio.src = "sound/win.mp3";
-                audio.load();
-                audio.play();
+                view.displayMessage(`${name1}, Вы потопили весь флот, за ${this.guesses} попыток`);
+                win();
+                result(name1, this.guesses);
+                switchToStartScreePage();
             }
         }
     }
@@ -191,18 +186,18 @@ function parseGuess(guess) { // функция получения координ
     const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]; // массив с буквами, которые могут присутствовать в координатах
 
     if (guess === null || guess.length !== 2) { // проверка на null и что в строке 2 символа
-        alert("Oops, please enter a letter and a number on the board.");
+        alert("пожалуйста, введите координаты");
     }
     else {
         firstChar = guess.charAt(0); // извлекает первый символ строки
         let row = alphabet.indexOf(firstChar); // получаем цифру от 0 до 6, соотвествующую букве
         let column = guess.charAt(1); // добавляется код для получения второго символа, представлящего столбец игрового поля
         if (isNaN(row) || isNaN(column)) { // проверка явлются ли цифрами строки и столбцы
-            alert("Oops, that isn't on the board.");
+            alert("пожалуйста, введите координаты");
         }
         // проверка влазят ли полученные цифры в диапазон игрового поля (см. объект модели)
         else if (row < 0 || row >= model.boardSize || column < 0 || column >= model.boardSize) {
-            alert("Oops, that's off the board!");
+            alert("координаты вне игрового поля");
         }
         else {
             return row + column;
@@ -236,3 +231,12 @@ model.generateShipLocations4(); // вызов метода, генерирующ
 model.generateShipLocations3();
 model.generateShipLocations2();
 model.generateShipLocations1();
+
+let mouseFire = document.getElementById('table');
+mouseFire.onclick = function (e) {
+    const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+    let row = alphabet[e.target.id.charAt(0)];
+    let column = e.target.id.charAt(1);
+    let guess = row + column;
+    controller.processGuess(guess);
+}

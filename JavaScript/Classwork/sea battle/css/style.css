@@ -25,20 +25,53 @@ body {
     margin-bottom: 50px;
 }
 
+h1 {
+    font-size: 3em;
+    margin: 30px;
+}
+
+h2 {
+    font-size: 2em;
+    margin: 20px;
+}
+
 .waves-effect {
     width: 250px;
-    padding: 0;
+    padding: 20px;
+    margin-top: 40px;
     margin-bottom: 40px;
     margin-left: 20px;
     margin-right: 20px;
+    color: white;
     background-color: #2E8B57;
+    font-size: 1em;
+    border-radius:10px;
 }
 
-.waves-effect input {
-    width: 100%;
-    height: 100%;
-    color: #fff;
+.waves-effect:hover {
+    background-color: #0ed4ee;
 }
+
+label {
+    padding: 20px;
+    transition: background-color 0.25s ease;
+    font-size: 1.2em;
+}
+
+input[type=checkbox] {
+    width: 14px;
+    height: 14px;
+}
+
+.check { height: 20px;
+    margin: 5px;
+    width: 16px;
+    background-color: #fff;
+    border: 1px solid #333;
+    transition: background-color 0.25s ease;
+}
+
+
 
 .game-backgrounds {
     display: flex;
@@ -95,6 +128,10 @@ td {
     height: 45px;
     border: solid gray 1px;
     background-color: rgb(47, 100, 100);
+}
+
+td:hover {
+    background-color: rgb(30, 201, 44);
 }
 
 th {
