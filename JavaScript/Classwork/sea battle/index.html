@@ -31,7 +31,7 @@
       return ` 
         <h2>Sea Battle !!!</h2>
         <h3>Присоединяйся к сражениям в морях и океанах!</h3>
-        <input type="button" class="waves-effect" value="Играть самому" onclick="switchToSelf('script/self.js')">
+        <input type="button" class="waves-effect" value="Играть самому" onclick="switchToSelf('script/selfLS.js')">
         <input type="button" class="waves-effect" value="Играть против компьютера" onclick="switchToComp('script/comp.js')">
         <input type="button" class="waves-effect" value="Играть с соперником" onclick="switchToOpponent('script/opponent.js')">
         <br>
@@ -906,7 +906,7 @@
             } else {
                 audioFone.pause();
             }
-        }, false);
+        });
 
         let hitSound = document.getElementById('hitSound');
         function hit() {
@@ -915,21 +915,19 @@
             audioHit.load();
             if (hitSound.checked) {
                 audioHit.play();
-            } else {
-                audioHit.pause();
-            } false;
+            }
         };
 
         let winSound = document.getElementById('winSound');
         function win() {
             let audioWin = new Audio();
-            audioWin.src = 'sound/win.mp3';
-            audioWin.load();
             if (winSound.checked) {
+                 audioWin.src = 'sound/win.mp3';
+                audioWin.load();
                 audioWin.play();
-            } else {
-                audioWin.pause();
-            } false;
+            };
+            setTimeout(()=>{switchToStartScreePage()},8000);
+            setTimeout(() => {location.reload()},8100);
         };
 
 
