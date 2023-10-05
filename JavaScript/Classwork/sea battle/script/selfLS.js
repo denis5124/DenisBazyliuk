@@ -138,7 +138,6 @@ const controller = {
                 view.displayMessage(`${name1}, you sank all my battleships, in ${this.guesses} guesses`);
                 win();
                 result(name1, this.guesses);
-                switchToStartScreePage();
             }
         }
     }

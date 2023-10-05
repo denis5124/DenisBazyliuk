@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>SeaBattle</title>
+
+</head>
+
+<body>
+
+  <div id='app'></div>
+
+  <script>
+
+    "use strict";
+
+    const IMG_URL = 'img/'; //глобальная переменная
+
+    const setBG = imgName => { 
+      const body = document.querySelector('body');
+      body.style.backgroundImage = `url(${IMG_URL}${imgName})`
+    }
+
+    const renderStartScreen = () => { //функция воспроизводит стартовый экран
+      setBG('artwork-battleships-british-fleets.jpg')
+        //функция возвращает кусок вёрстки
+      return ` 
+        <h2>Sea Battle !!!</h2>
+        <h3>Присоединяйся к сражениям в морях и океанах!</h3>
+        <input type="button" class="waves-effect" value="Играть самому" onclick="switchToSelf('script/selfLS.js')">
+        <input type="button" class="waves-effect" value="Играть против компьютера" onclick="switchToComp('script/comp.js')">
+        <input type="button" class="waves-effect" value="Играть с соперником" onclick="switchToOpponent('script/opponent.js')">
+        <br>
+        <label><input type="checkbox" id="foneSound">Включить фоновый звук</label>
+        <label><input type="checkbox" id="hitSound">Включить эффект попадания</label>
+        <label><input type="checkbox" id="winSound">Включить эффект победы</label>
+      `
+    }
+
+    const renderSelfGame = () => { //функция воспроизводит стартовый экран
+        setBG('karta-mira2.jpg')
+        return `
+        <div id="board">
+
+        <div id="messageArea"></div> <!-- элемент для вывода сообщений -->
+
+        <table id="table">
+            <tr>
+                <th></th>
+                <th>0</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+            </tr>
+            <tr>
+                <th>A</th>
+                <td id="00"></td>
+                <td id="01"></td>
+                <td id="02"></td>
+                <td id="03"></td>
+                <td id="04"></td>
+                <td id="05"></td>
+                <td id="06"></td>
+                <td id="07"></td>
+                <td id="08"></td>
+                <td id="09"></td>
+            </tr>
+            <tr>
+                <th>B</th>
+                <td id="10"></td>
+                <td id="11"></td>
+                <td id="12"></td>
+                <td id="13"></td>
+                <td id="14"></td>
+                <td id="15"></td>
+                <td id="16"></td>
+                <td id="17"></td>
+                <td id="18"></td>
+                <td id="19"></td>
+            </tr>
+            <tr>
+                <th>C</th>
+                <td id="20"></td>
+                <td id="21"></td>
+                <td id="22"></td>
+                <td id="23"></td>
+                <td id="24"></td>
+                <td id="25"></td>
+                <td id="26"></td>
+                <td id="27"></td>
+                <td id="28"></td>
+                <td id="29"></td>
+            </tr>
+            <tr>
+                <th>D</th>
+                <td id="30"></td>
+                <td id="31"></td>
+                <td id="32"></td>
+                <td id="33"></td>
+                <td id="34"></td>
+                <td id="35"></td>
+                <td id="36"></td>
+                <td id="37"></td>
+                <td id="38"></td>
+                <td id="39"></td>
+            </tr>
+            <tr>
+                <th>E</th>
+                <td id="40"></td>
+                <td id="41"></td>
+                <td id="42"></td>
+                <td id="43"></td>
+                <td id="44"></td>
+                <td id="45"></td>
+                <td id="46"></td>
+                <td id="47"></td>
+                <td id="48"></td>
+                <td id="49"></td>
+            </tr>
+            <tr>
+                <th>F</th>
+                <td id="50"></td>
+                <td id="51"></td>
+                <td id="52"></td>
+                <td id="53"></td>
+                <td id="54"></td>
+                <td id="55"></td>
+                <td id="56"></td>
+                <td id="57"></td>
+                <td id="58"></td>
+                <td id="59"></td>
+            </tr>
+            <tr>
+                <th>G</th>
+                <td id="60"></td>
+                <td id="61"></td>
+                <td id="62"></td>
+                <td id="63"></td>
+                <td id="64"></td>
+                <td id="65"></td>
+                <td id="66"></td>
+                <td id="67"></td>
+                <td id="68"></td>
+                <td id="69"></td>
+            </tr>
+            <tr>
+                <th>H</th>
+                <td id="70"></td>
+                <td id="71"></td>
+                <td id="72"></td>
+                <td id="73"></td>
+                <td id="74"></td>
+                <td id="75"></td>
+                <td id="76"></td>
+                <td id="77"></td>
+                <td id="78"></td>
+                <td id="79"></td>
+            </tr>
+            <tr>
+                <th>I</th>
+                <td id="80"></td>
+                <td id="81"></td>
+                <td id="82"></td>
+                <td id="83"></td>
+                <td id="84"></td>
+                <td id="85"></td>
+                <td id="86"></td>
+                <td id="87"></td>
+                <td id="88"></td>
+                <td id="89"></td>
+            </tr>
+            <tr>
+                <th>J</th>
+                <td id="90"></td>
+                <td id="91"></td>
+                <td id="92"></td>
+                <td id="93"></td>
+                <td id="94"></td>
+                <td id="95"></td>
+                <td id="96"></td>
+                <td id="97"></td>
+                <td id="98"></td>
+                <td id="99"></td>
+            </tr>
+
+        </table>
+
+        <form action="">
+            <input type="text" id="guessInput" placeholder="A0">
+            <input type="button" id="fireButton" value="Fire!">
+        </form>
+
+      </div>
+      `
+    }
+
+    const renderCompGame = () => { //функция воспроизводит стартовый экран
+        setBG('karta-mira2.jpg')
+        return `
+        <body>
+
+    <div id="board">
+
+        <div id="messageArea1"></div> <!-- элемент для вывода сообщений -->
+
+        <table id="table1">
+            <tr>
+                <th></th>
+                <th>0</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+            </tr>
+            <tr>
+                <th>A</th>
+                <td id="00"></td>
+                <td id="01"></td>
+                <td id="02"></td>
+                <td id="03"></td>
+                <td id="04"></td>
+                <td id="05"></td>
+                <td id="06"></td>
+                <td id="07"></td>
+                <td id="08"></td>
+                <td id="09"></td>
+            </tr>
+            <tr>
+                <th>B</th>
+                <td id="10"></td>
+                <td id="11"></td>
+                <td id="12"></td>
+                <td id="13"></td>
+                <td id="14"></td>
+                <td id="15"></td>
+                <td id="16"></td>
+                <td id="17"></td>
+                <td id="18"></td>
+                <td id="19"></td>
+            </tr>
+            <tr>
+                <th>C</th>
+                <td id="20"></td>
+                <td id="21"></td>
+                <td id="22"></td>
+                <td id="23"></td>
+                <td id="24"></td>
+                <td id="25"></td>
+                <td id="26"></td>
+                <td id="27"></td>
+                <td id="28"></td>
+                <td id="29"></td>
+            </tr>
+            <tr>
+                <th>D</th>
+                <td id="30"></td>
+                <td id="31"></td>
+                <td id="32"></td>
+                <td id="33"></td>
+                <td id="34"></td>
+                <td id="35"></td>
+                <td id="36"></td>
+                <td id="37"></td>
+                <td id="38"></td>
+                <td id="39"></td>
+            </tr>
+            <tr>
+                <th>E</th>
+                <td id="40"></td>
+                <td id="41"></td>
+                <td id="42"></td>
+                <td id="43"></td>
+                <td id="44"></td>
+                <td id="45"></td>
+                <td id="46"></td>
+                <td id="47"></td>
+                <td id="48"></td>
+                <td id="49"></td>
+            </tr>
+            <tr>
+                <th>F</th>
+                <td id="50"></td>
+                <td id="51"></td>
+                <td id="52"></td>
+                <td id="53"></td>
+                <td id="54"></td>
+                <td id="55"></td>
+                <td id="56"></td>
+                <td id="57"></td>
+                <td id="58"></td>
+                <td id="59"></td>
+            </tr>
+            <tr>
+                <th>G</th>
+                <td id="60"></td>
+                <td id="61"></td>
+                <td id="62"></td>
+                <td id="63"></td>
+                <td id="64"></td>
+                <td id="65"></td>
+                <td id="66"></td>
+                <td id="67"></td>
+                <td id="68"></td>
+                <td id="69"></td>
+            </tr>
+            <tr>
+                <th>H</th>
+                <td id="70"></td>
+                <td id="71"></td>
+                <td id="72"></td>
+                <td id="73"></td>
+                <td id="74"></td>
+                <td id="75"></td>
+                <td id="76"></td>
+                <td id="77"></td>
+                <td id="78"></td>
+                <td id="79"></td>
+            </tr>
+            <tr>
+                <th>I</th>
+                <td id="80"></td>
+                <td id="81"></td>
+                <td id="82"></td>
+                <td id="83"></td>
+                <td id="84"></td>
+                <td id="85"></td>
+                <td id="86"></td>
+                <td id="87"></td>
+                <td id="88"></td>
+                <td id="89"></td>
+            </tr>
+            <tr>
+                <th>J</th>
+                <td id="90"></td>
+                <td id="91"></td>
+                <td id="92"></td>
+                <td id="93"></td>
+                <td id="94"></td>
+                <td id="95"></td>
+                <td id="96"></td>
+                <td id="97"></td>
+                <td id="98"></td>
+                <td id="99"></td>
+            </tr>
+
+        </table>
+
+        <div id="messageArea2"></div> <!-- элемент для вывода сообщений -->
+        
+        <table id="table2">
+            <tr>
+                <th></th>
+                <th>0</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+            </tr>
+            <tr>
+                <th>A</th>
+                <td id="200"></td>
+                <td id="201"></td>
+                <td id="202"></td>
+                <td id="203"></td>
+                <td id="204"></td>
+                <td id="205"></td>
+                <td id="206"></td>
+                <td id="207"></td>
+                <td id="208"></td>
+                <td id="209"></td>
+            </tr>
+            <tr>
+                <th>B</th>
+                <td id="210"></td>
+                <td id="211"></td>
+                <td id="212"></td>
+                <td id="213"></td>
+                <td id="214"></td>
+                <td id="215"></td>
+                <td id="216"></td>
+                <td id="217"></td>
+                <td id="218"></td>
+                <td id="219"></td>
+            </tr>
+            <tr>
+                <th>C</th>
+                <td id="220"></td>
+                <td id="221"></td>
+                <td id="222"></td>
+                <td id="223"></td>
+                <td id="224"></td>
+                <td id="225"></td>
+                <td id="226"></td>
+                <td id="227"></td>
+                <td id="228"></td>
+                <td id="229"></td>
+            </tr>
+            <tr>
+                <th>D</th>
+                <td id="230"></td>
+                <td id="231"></td>
+                <td id="232"></td>
+                <td id="233"></td>
+                <td id="234"></td>
+                <td id="235"></td>
+                <td id="236"></td>
+                <td id="237"></td>
+                <td id="238"></td>
+                <td id="239"></td>
+            </tr>
+            <tr>
+                <th>E</th>
+                <td id="240"></td>
+                <td id="241"></td>
+                <td id="242"></td>
+                <td id="243"></td>
+                <td id="244"></td>
+                <td id="245"></td>
+                <td id="246"></td>
+                <td id="247"></td>
+                <td id="248"></td>
+                <td id="249"></td>
+            </tr>
+            <tr>
+                <th>F</th>
+                <td id="250"></td>
+                <td id="251"></td>
+                <td id="252"></td>
+                <td id="253"></td>
+                <td id="254"></td>
+                <td id="255"></td>
+                <td id="256"></td>
+                <td id="257"></td>
+                <td id="258"></td>
+                <td id="259"></td>
+            </tr>
+            <tr>
+                <th>G</th>
+                <td id="260"></td>
+                <td id="261"></td>
+                <td id="262"></td>
+                <td id="263"></td>
+                <td id="264"></td>
+                <td id="265"></td>
+                <td id="266"></td>
+                <td id="267"></td>
+                <td id="268"></td>
+                <td id="269"></td>
+            </tr>
+            <tr>
+                <th>H</th>
+                <td id="270"></td>
+                <td id="271"></td>
+                <td id="272"></td>
+                <td id="273"></td>
+                <td id="274"></td>
+                <td id="275"></td>
+                <td id="276"></td>
+                <td id="277"></td>
+                <td id="278"></td>
+                <td id="279"></td>
+            </tr>
+            <tr>
+                <th>I</th>
+                <td id="280"></td>
+                <td id="281"></td>
+                <td id="282"></td>
+                <td id="283"></td>
+                <td id="284"></td>
+                <td id="285"></td>
+                <td id="286"></td>
+                <td id="287"></td>
+                <td id="288"></td>
+                <td id="289"></td>
+            </tr>
+            <tr>
+                <th>J</th>
+                <td id="290"></td>
+                <td id="291"></td>
+                <td id="292"></td>
+                <td id="293"></td>
+                <td id="294"></td>
+                <td id="295"></td>
+                <td id="296"></td>
+                <td id="297"></td>
+                <td id="298"></td>
+                <td id="299"></td>
+            </tr>
+        
+        </table>
+
+        <form id="form1" action="">
+            <input type="button" id="fireButton1" value="Fire!">
+        </form>
+
+        <form id="form2" action="">
+            <input type="text" id="guessInput2" placeholder="A0">
+            <input type="button" id="fireButton2" value="Fire!">
+        </form>
+
+    </div>
+      `
+    }
+
+    const renderOpponentGame = () => { //функция воспроизводит стартовый экран
+            setBG('karta-mira2.jpg')
+            return `
+        <div id="board">
+
+            <div id="messageArea1"></div> <!-- элемент для вывода сообщений -->
+
+            <table id="table1">
+                <tr>
+                    <th></th>
+                    <th>0</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                </tr>
+                <tr>
+                    <th>A</th>
+                    <td id="00"></td>
+                    <td id="01"></td>
+                    <td id="02"></td>
+                    <td id="03"></td>
+                    <td id="04"></td>
+                    <td id="05"></td>
+                    <td id="06"></td>
+                    <td id="07"></td>
+                    <td id="08"></td>
+                    <td id="09"></td>
+                </tr>
+                <tr>
+                    <th>B</th>
+                    <td id="10"></td>
+                    <td id="11"></td>
+                    <td id="12"></td>
+                    <td id="13"></td>
+                    <td id="14"></td>
+                    <td id="15"></td>
+                    <td id="16"></td>
+                    <td id="17"></td>
+                    <td id="18"></td>
+                    <td id="19"></td>
+                </tr>
+                <tr>
+                    <th>C</th>
+                    <td id="20"></td>
+                    <td id="21"></td>
+                    <td id="22"></td>
+                    <td id="23"></td>
+                    <td id="24"></td>
+                    <td id="25"></td>
+                    <td id="26"></td>
+                    <td id="27"></td>
+                    <td id="28"></td>
+                    <td id="29"></td>
+                </tr>
+                <tr>
+                    <th>D</th>
+                    <td id="30"></td>
+                    <td id="31"></td>
+                    <td id="32"></td>
+                    <td id="33"></td>
+                    <td id="34"></td>
+                    <td id="35"></td>
+                    <td id="36"></td>
+                    <td id="37"></td>
+                    <td id="38"></td>
+                    <td id="39"></td>
+                </tr>
+                <tr>
+                    <th>E</th>
+                    <td id="40"></td>
+                    <td id="41"></td>
+                    <td id="42"></td>
+                    <td id="43"></td>
+                    <td id="44"></td>
+                    <td id="45"></td>
+                    <td id="46"></td>
+                    <td id="47"></td>
+                    <td id="48"></td>
+                    <td id="49"></td>
+                </tr>
+                <tr>
+                    <th>F</th>
+                    <td id="50"></td>
+                    <td id="51"></td>
+                    <td id="52"></td>
+                    <td id="53"></td>
+                    <td id="54"></td>
+                    <td id="55"></td>
+                    <td id="56"></td>
+                    <td id="57"></td>
+                    <td id="58"></td>
+                    <td id="59"></td>
+                </tr>
+                <tr>
+                    <th>G</th>
+                    <td id="60"></td>
+                    <td id="61"></td>
+                    <td id="62"></td>
+                    <td id="63"></td>
+                    <td id="64"></td>
+                    <td id="65"></td>
+                    <td id="66"></td>
+                    <td id="67"></td>
+                    <td id="68"></td>
+                    <td id="69"></td>
+                </tr>
+                <tr>
+                    <th>H</th>
+                    <td id="70"></td>
+                    <td id="71"></td>
+                    <td id="72"></td>
+                    <td id="73"></td>
+                    <td id="74"></td>
+                    <td id="75"></td>
+                    <td id="76"></td>
+                    <td id="77"></td>
+                    <td id="78"></td>
+                    <td id="79"></td>
+                </tr>
+                <tr>
+                    <th>I</th>
+                    <td id="80"></td>
+                    <td id="81"></td>
+                    <td id="82"></td>
+                    <td id="83"></td>
+                    <td id="84"></td>
+                    <td id="85"></td>
+                    <td id="86"></td>
+                    <td id="87"></td>
+                    <td id="88"></td>
+                    <td id="89"></td>
+                </tr>
+                <tr>
+                    <th>J</th>
+                    <td id="90"></td>
+                    <td id="91"></td>
+                    <td id="92"></td>
+                    <td id="93"></td>
+                    <td id="94"></td>
+                    <td id="95"></td>
+                    <td id="96"></td>
+                    <td id="97"></td>
+                    <td id="98"></td>
+                    <td id="99"></td>
+                </tr>
+
+            </table>
+
+            <div id="messageArea2"></div> <!-- элемент для вывода сообщений -->
+            
+            <table id="table2">
+                <tr>
+                    <th></th>
+                    <th>0</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                </tr>
+                <tr>
+                    <th>A</th>
+                    <td id="200"></td>
+                    <td id="201"></td>
+                    <td id="202"></td>
+                    <td id="203"></td>
+                    <td id="204"></td>
+                    <td id="205"></td>
+                    <td id="206"></td>
+                    <td id="207"></td>
+                    <td id="208"></td>
+                    <td id="209"></td>
+                </tr>
+                <tr>
+                    <th>B</th>
+                    <td id="210"></td>
+                    <td id="211"></td>
+                    <td id="212"></td>
+                    <td id="213"></td>
+                    <td id="214"></td>
+                    <td id="215"></td>
+                    <td id="216"></td>
+                    <td id="217"></td>
+                    <td id="218"></td>
+                    <td id="219"></td>
+                </tr>
+                <tr>
+                    <th>C</th>
+                    <td id="220"></td>
+                    <td id="221"></td>
+                    <td id="222"></td>
+                    <td id="223"></td>
+                    <td id="224"></td>
+                    <td id="225"></td>
+                    <td id="226"></td>
+                    <td id="227"></td>
+                    <td id="228"></td>
+                    <td id="229"></td>
+                </tr>
+                <tr>
+                    <th>D</th>
+                    <td id="230"></td>
+                    <td id="231"></td>
+                    <td id="232"></td>
+                    <td id="233"></td>
+                    <td id="234"></td>
+                    <td id="235"></td>
+                    <td id="236"></td>
+                    <td id="237"></td>
+                    <td id="238"></td>
+                    <td id="239"></td>
+                </tr>
+                <tr>
+                    <th>E</th>
+                    <td id="240"></td>
+                    <td id="241"></td>
+                    <td id="242"></td>
+                    <td id="243"></td>
+                    <td id="244"></td>
+                    <td id="245"></td>
+                    <td id="246"></td>
+                    <td id="247"></td>
+                    <td id="248"></td>
+                    <td id="249"></td>
+                </tr>
+                <tr>
+                    <th>F</th>
+                    <td id="250"></td>
+                    <td id="251"></td>
+                    <td id="252"></td>
+                    <td id="253"></td>
+                    <td id="254"></td>
+                    <td id="255"></td>
+                    <td id="256"></td>
+                    <td id="257"></td>
+                    <td id="258"></td>
+                    <td id="259"></td>
+                </tr>
+                <tr>
+                    <th>G</th>
+                    <td id="260"></td>
+                    <td id="261"></td>
+                    <td id="262"></td>
+                    <td id="263"></td>
+                    <td id="264"></td>
+                    <td id="265"></td>
+                    <td id="266"></td>
+                    <td id="267"></td>
+                    <td id="268"></td>
+                    <td id="269"></td>
+                </tr>
+                <tr>
+                    <th>H</th>
+                    <td id="270"></td>
+                    <td id="271"></td>
+                    <td id="272"></td>
+                    <td id="273"></td>
+                    <td id="274"></td>
+                    <td id="275"></td>
+                    <td id="276"></td>
+                    <td id="277"></td>
+                    <td id="278"></td>
+                    <td id="279"></td>
+                </tr>
+                <tr>
+                    <th>I</th>
+                    <td id="280"></td>
+                    <td id="281"></td>
+                    <td id="282"></td>
+                    <td id="283"></td>
+                    <td id="284"></td>
+                    <td id="285"></td>
+                    <td id="286"></td>
+                    <td id="287"></td>
+                    <td id="288"></td>
+                    <td id="289"></td>
+                </tr>
+                <tr>
+                    <th>J</th>
+                    <td id="290"></td>
+                    <td id="291"></td>
+                    <td id="292"></td>
+                    <td id="293"></td>
+                    <td id="294"></td>
+                    <td id="295"></td>
+                    <td id="296"></td>
+                    <td id="297"></td>
+                    <td id="298"></td>
+                    <td id="299"></td>
+                </tr>
+            
+            </table>
+
+            <form action="">
+                <input type="text" id="guessInput1" placeholder="A0">
+                <input type="button" id="fireButton1" value="Fire!">
+            </form>
+
+            <form id="form2" action="">
+                <input type="text" id="guessInput2" placeholder="A0">
+                <input type="button" id="fireButton2" value="Fire!">
+            </form>
+
+    </div>
+      `
+    }
+
+    // router
+    window.onhashchange = switchToStateFromURLHash;
+
+    function switchToStateFromURLHash() {
+      const URLHash = window.location.hash || "#start-screen"; //url хэш, который ставится по умолчанию (стартовый экран)
+
+      let pageHTML = '';
+
+      switch (URLHash) {
+        case '#start-screen':
+          pageHTML += renderStartScreen();
+          break;
+        case '#self-game':
+          pageHTML += renderSelfGame();
+          break;
+        case '#vsComp':
+          pageHTML += renderCompGame();
+          break;
+        case '#vsOpponent':
+          pageHTML += renderOpponentGame();
+        break;
+      }
+      document.getElementById('app').innerHTML = pageHTML;
+    }
+
+    function switchToState(newState) {
+      location.hash = newState.pagename;
+    }
+
+    function switchToStartScreePage() {
+      switchToState({ pagename: 'start-screen' });
+    }
+
+    function switchToSelf(url) {
+      switchToState({ pagename: 'self-game' });
+      const s=document.createElement("script");
+      s.src=url;
+      document.getElementsByTagName("body")[0].appendChild(s);
+    }
+
+    function switchToComp(url) {
+      switchToState({ pagename: 'vsComp' });
+      const s = document.createElement("script");
+      s.src = url;
+      document.getElementsByTagName("body")[0].appendChild(s);
+      }
+
+    function switchToOpponent(url) {
+      switchToState({ pagename: 'vsOpponent' });
+      const s = document.createElement("script");
+      s.src = url;
+      document.getElementsByTagName("body")[0].appendChild(s);
+      }
+
+    switchToStateFromURLHash();
+
+    let foneSound = document.getElementById('foneSound');
+        let audioFone = new Audio();
+        audioFone.src = 'sound/fone.mp3';
+        audioFone.load();
+        foneSound.addEventListener('change', function (event) {
+            if (event.target.checked) {
+                audioFone.play();
+                audioFone.loop = true;
+            } else {
+                audioFone.pause();
+            }
+        });
+
+        let hitSound = document.getElementById('hitSound');
+        function hit() {
+            let audioHit = new Audio();
+            audioHit.src = 'sound/hit.mp3';
+            audioHit.load();
+            if (hitSound.checked) {
+                audioHit.play();
+            }
+        };
+
+        let winSound = document.getElementById('winSound');
+        function win() {
+            let audioWin = new Audio();
+            if (winSound.checked) {
+                 audioWin.src = 'sound/win.mp3';
+                audioWin.load();
+                audioWin.play();
+            };
+            setTimeout(()=>{switchToStartScreePage()},8000);
+            setTimeout(() => {location.reload()},8100);
+        };
+
+
+
+        function result(name, guesses) {
+            let array;
+            if (localStorage.result === undefined) {
+                array = [['',101], ['', 101], ['', 101], ['', 101], ['', 101]]
+            }else{
+                array = JSON.parse(localStorage.result)
+            }
+            for (let i = 0; i < array.length; i++) {
+                if (guesses < array[i][1]) {
+                    array.splice(i, 0, [name,guesses]);
+                    break;
+                }
+            }
+            if (array.length > 5) {
+                array.splice(5, 1);
+            }
+            console.log(array);
+            localStorage.result = JSON.stringify(array);
+            alert(JSON.parse(localStorage.result));
+        }
+    
+        
+  </script>
+
+</body>
+
+</html>
